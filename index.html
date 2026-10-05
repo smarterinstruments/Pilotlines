@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Independent weekly view of the 11 EU Chips Act pilot lines: readiness for open access, what each line offers, access timeline and the way in through the Chips Competence Centres. Alpha version.">
+<meta name="robots" content="noindex">
+<title>EU Pilot Lines Monitor</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&family=Geist+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a one-page site in the aCCCess visual language. Navy hero with the network's links, sticky section rail,
+   alternating white / pale-blue bands, light-blue framed cards. The "Access via centres" band is where the page
+   hands the reader over to the aCCCess network. Own wordmark; no aCCCess logo. */
+:root{
+  --bg:#ffffff; --bg-alt:#f8fafe; --panel:#ffffff; --panel2:#f2f6ff; --tint:#dce8ff;
+  --rule:#dce8ff; --line:#e3e8f0;
+  --fg:#0a0a0a; --ink2:#364153; --muted:#4a5565; --faint:#6a7282;
+  --navy:#003399; --link:#155dfc; --lime:#98df3c;
+  --hero-a:#062666; --hero-b:#123b89; --hero-fg:#ffffff; --hero-mut:#c9d6f2; --hero-line:rgba(255,255,255,.18);
+  --logic:#5b4bc4; --pack:#11845d; --phot:#155dfc; --power:#cf4d17; --quant:#b86e00;
+  --good:#16803c; --warn:#b45309;
+  --sans:"Raleway","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+  --mono:"Geist Mono",ui-monospace,"SFMono-Regular","Cascadia Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0b1430; --bg-alt:#0e1a3d; --panel:#101d45; --panel2:#15275a; --tint:#22396f;
+  --rule:#26396c; --line:#1f305c;
+  --fg:#eef2fb; --ink2:#cdd6ec; --muted:#a8b4d0; --faint:#8492b4;
+  --navy:#a9c1ff; --link:#86aaff;
+  --hero-a:#041a4a; --hero-b:#0d2d6e;
+  --logic:#9d90ff; --pack:#3fc796; --phot:#6b9bff; --power:#ff8150; --quant:#f0ab3f;
+  --good:#52c47f; --warn:#f0ab3f;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0b1430; --bg-alt:#0e1a3d; --panel:#101d45; --panel2:#15275a; --tint:#22396f;
+  --rule:#26396c; --line:#1f305c;
+  --fg:#eef2fb; --ink2:#cdd6ec; --muted:#a8b4d0; --faint:#8492b4;
+  --navy:#a9c1ff; --link:#86aaff;
+  --hero-a:#041a4a; --hero-b:#0d2d6e;
+  --logic:#9d90ff; --pack:#3fc796; --phot:#6b9bff; --power:#ff8150; --quant:#f0ab3f;
+  --good:#52c47f; --warn:#f0ab3f;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 var(--sans);font-variant-numeric:lining-nums;margin:0}
+a{color:var(--link);text-underline-offset:2px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
+.in{max-width:1180px;margin:0 auto;padding-inline:20px}
+
+/* hero */
+.hero{background:linear-gradient(160deg,var(--hero-a) 0%,var(--hero-b) 58%,var(--hero-a) 100%);color:var(--hero-fg);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.09) 1px,transparent 1.2px);background-size:22px 22px;mask-image:linear-gradient(100deg,transparent 35%,#000 100%);-webkit-mask-image:linear-gradient(100deg,transparent 35%,#000 100%);pointer-events:none}
+.hero .in{position:relative;padding-block:0 40px}
+.topbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;padding-block:18px;border-bottom:1px solid var(--hero-line)}
+.brand{display:flex;align-items:center;gap:10px;color:var(--hero-fg);text-decoration:none}
+.brand .bdot{width:14px;height:14px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px rgba(152,223,60,.18);flex:none}
+.brand b{display:block;font-weight:700;font-size:19px;letter-spacing:-.01em;line-height:1.1}
+.brand small{display:block;font-size:12px;color:var(--hero-mut);letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+.netnav{display:flex;flex-wrap:wrap;align-items:center;gap:4px 18px;font-size:14px;font-weight:600}
+.netnav .nn-lb{font-size:13px;color:var(--lime);font-weight:700}
+.netnav a{color:var(--hero-fg);text-decoration:none;padding-block:4px;border-bottom:2px solid transparent}
+.netnav a:hover{border-bottom-color:var(--lime)}
+.strip{font:12px/1.4 var(--mono);color:var(--hero-mut);display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:30px}
+.strip b{color:var(--hero-fg);font-weight:600}
+h1{font-size:clamp(32px,5.2vw,56px);line-height:1.1;font-weight:400;letter-spacing:-1px;margin:12px 0 12px;text-wrap:balance;color:var(--hero-fg);max-width:20ch}
+h1 em{font-style:normal;font-weight:700}
+.lede{color:var(--hero-mut);max-width:66ch;margin:0 0 24px;font-size:17px;font-weight:500}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.pb{display:inline-block;border-radius:999px;padding:9px 22px;font:700 15px var(--sans);text-decoration:none;border:2px solid var(--hero-fg)}
+.pb.solid{background:var(--hero-fg);color:#003399}
+.pb.solid:hover{background:transparent;color:var(--hero-fg)}
+.pb.ghost{color:var(--hero-fg)}
+.pb.ghost:hover{background:var(--hero-fg);color:#003399}
+.alphanote{margin-top:22px;font-size:14px;color:var(--hero-mut);display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.alpha{font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#0b2a00;background:var(--lime);border-radius:999px;padding:3px 10px}
+.alphanote a{color:var(--hero-fg);font-weight:700}
+
+/* section rail */
+.rail{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.rail nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:thin}
+.rail a{color:var(--muted);font:600 15px var(--sans);padding:14px 12px 11px;white-space:nowrap;text-decoration:none;border-bottom:3px solid transparent}
+.rail a:hover{color:var(--navy)}
+.rail a[aria-current="true"]{color:var(--navy);border-bottom-color:var(--lime)}
+
+/* bands */
+.band{padding-block:52px;scroll-margin-top:52px}
+.band:nth-of-type(even){background:var(--bg-alt)}
+.band.access{background:var(--panel2)}
+.eyebrow{font:700 12px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--link);margin:0 0 6px}
+h2{font-size:clamp(26px,3.4vw,36px);font-weight:600;line-height:1.18;color:var(--navy);margin:0 0 10px;text-wrap:balance;letter-spacing:-.4px}
+h3.sh{font-size:20px;font-weight:600;color:var(--navy);margin:36px 0 10px;text-wrap:balance}
+.sub{color:var(--muted);margin:0 0 22px;max-width:72ch;font-size:16.5px}
+.grid2{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:30px;align-items:start}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:860px){.grid2,.grid3{grid-template-columns:1fr}}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:0 0 28px}
+@media (max-width:980px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:440px){.stats{grid-template-columns:1fr}}
+.stat{background:var(--panel);border:2px solid var(--rule);border-radius:16px;padding:16px 20px;min-width:0}
+.stat .v{font:600 40px/1.05 var(--sans);color:var(--navy);font-variant-numeric:lining-nums tabular-nums}
+.stat .l{font-size:15px;font-weight:700;margin-top:4px}
+.stat .s{font-size:13.5px;color:var(--muted);margin-top:4px}
+
+/* radar */
+.radar svg{width:100%;height:auto;display:block}
+.ringkey{display:grid;gap:10px}
+.ringkey .rk{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:12px 14px;background:var(--panel);border:2px solid var(--rule);border-radius:12px}
+.ringkey .n{font:600 13px var(--mono)}
+.ringkey .t{font-weight:700}
+.ringkey .d{color:var(--muted);font-size:14px}
+.ringkey .who{font-size:14px;margin-top:4px;font-weight:600;color:var(--ink2)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted);margin-top:14px}
+.sw{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.dot{cursor:pointer}
+@media (prefers-reduced-motion:no-preference){.dot{transition:r .15s}.dot:hover{r:9}}
+
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
+@media (max-width:420px){.cards{grid-template-columns:1fr}}
+.card{background:var(--panel);border:2px solid var(--rule);border-radius:16px;padding:18px 20px;min-width:0;scroll-margin-top:70px;border-top:5px solid var(--c)}
+.card h3{margin:0;font-size:20px;font-weight:700;color:var(--navy);display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.pill{font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.06em;padding:3px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.r1{color:var(--good)} .r2{color:var(--link)} .r3{color:var(--warn)} .r4{color:var(--faint)}
+.meta{font:12px/1.5 var(--mono);color:var(--muted);margin:6px 0 12px}
+.card dl{margin:0;display:grid;gap:8px}
+.card dt{font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--faint)}
+.card dd{margin:0;font-size:15px}
+.card dd.via{background:var(--panel2);border-radius:10px;padding:8px 10px}
+.card .links{margin-top:14px;font-size:14px;display:flex;gap:8px 14px;flex-wrap:wrap;font-weight:700}
+.card .links a.cc{color:var(--navy)}
+.card.flash{box-shadow:0 0 0 4px var(--lime)}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px;align-items:center}
+.filters .lb{font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--faint);margin-right:4px}
+.filters button{background:var(--panel);border:1px solid var(--rule);color:var(--ink2);border-radius:999px;padding:5px 14px;font:600 13px var(--sans);cursor:pointer}
+.filters button[aria-pressed="true"]{color:var(--bg);background:var(--navy);border-color:var(--navy)}
+.tl svg{width:100%;height:auto;display:block;min-width:640px}
+.scroll{overflow-x:auto}
+
+/* access band */
+.cta{background:var(--panel);border:2px solid var(--rule);border-radius:16px;padding:20px 22px;display:flex;flex-direction:column;gap:8px;min-width:0;position:relative}
+.cta::before{content:"";position:absolute;left:22px;top:-2px;width:44px;height:4px;border-radius:0 0 4px 4px;background:var(--lime)}
+.cta h3{margin:4px 0 0;font-size:19px;font-weight:700;color:var(--navy)}
+.cta p{margin:0;color:var(--ink2);font-size:15px}
+.cta a{align-self:flex-start;margin-top:auto;border:2px solid var(--navy);color:var(--navy);border-radius:999px;padding:7px 18px;font:700 14px var(--sans);text-decoration:none}
+.cta a:hover{background:var(--navy);color:var(--bg)}
+.callout{background:var(--panel);border:2px solid var(--rule);border-radius:16px;padding:18px 22px;margin:22px 0 0}
+.callout h3{margin:0 0 8px;font-size:18px;font-weight:700;color:var(--navy)}
+.callout ul{margin:8px 0 0;padding-left:20px}
+.callout li{margin-bottom:6px}
+.callout p{margin:0}
+
+/* tables */
+table{border-collapse:collapse;width:100%;font-size:15px;background:var(--panel)}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--faint);background:var(--bg-alt)}
+td.d{font:13px var(--mono);white-space:nowrap;color:var(--muted);font-variant-numeric:tabular-nums}
+.tag{display:inline-block;font:600 12px var(--sans);padding:2px 10px;border-radius:999px;background:var(--tint);color:var(--navy);white-space:nowrap}
+.ty{display:inline-block;font:700 10.5px var(--sans);text-transform:uppercase;letter-spacing:.06em;padding:2px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap;margin-top:4px}
+.ty-roadmap{color:var(--warn)} .ty-service{color:var(--good)} .ty-event{color:var(--link)} .ty-milestone{color:var(--faint)}
+.note{font-size:14px;color:var(--muted);margin-top:12px;max-width:80ch}
+.ccmark{display:inline-block;font:700 10.5px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--good);border:1px solid currentColor;border-radius:999px;padding:1px 7px;margin-left:6px;vertical-align:1px}
+.watch li b{color:var(--navy)}
+
+/* feedback */
+.fbq{max-width:80ch;padding-left:22px}
+.fbq li{margin-bottom:12px}
+.fbq b{display:block;color:var(--navy)}
+.mail{font:600 15px var(--mono);user-select:all}
+.copy{background:var(--panel);border:2px solid var(--navy);color:var(--navy);border-radius:999px;padding:4px 14px;font:700 13px var(--sans);cursor:pointer;margin-left:8px}
+.src{columns:2;column-gap:32px;padding-left:20px}
+.src li{break-inside:avoid;margin-bottom:6px}
+@media (max-width:760px){.src{columns:1}}
+
+/* footer */
+.site-foot{background:var(--panel2);color:var(--ink2);font-size:14px;border-top:1px solid var(--line)}
+.site-foot .in{padding-block:32px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:20px 40px}
+@media (max-width:760px){.site-foot .in{grid-template-columns:1fr}}
+.site-foot h4{margin:0 0 8px;font-size:15px;color:var(--navy)}
+.site-foot ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 16px;font-weight:600}
+.site-foot a{color:var(--navy)}
+.site-foot p{margin:0 0 8px;max-width:70ch}
+.foot{font:12px var(--mono);color:var(--faint)}
+
+/* embedded in another site (?embed): no top bar, no footer, shorter hero */
+html.embed .topbar,html.embed .site-foot{display:none}
+html.embed .hero .in{padding-block:6px 30px}
+html.embed .strip{margin-top:14px}
+</style>
+</head>
+<body>
+
+
+<header class="hero">
+  <div class="in">
+    <div class="topbar">
+      <a class="brand" href="#overview"><span class="bdot" aria-hidden="true"></span><span><b>Pilot Lines Monitor</b><small>EU Chips Act</small></span></a>
+      <nav class="netnav" aria-label="aCCCess network of Chips Competence Centres">
+        <a class="nn-lb" href="https://www.acccess.eu/" target="_blank" rel="noopener">aCCCess network</a>
+        <a href="https://www.acccess.eu/network" target="_blank" rel="noopener">Network</a>
+        <a href="https://www.acccess.eu/technologies" target="_blank" rel="noopener">Technologies</a>
+        <a href="https://www.acccess.eu/trainings" target="_blank" rel="noopener">Trainings</a>
+        <a href="https://www.acccess.eu/open-calls" target="_blank" rel="noopener">Open calls</a>
+        <a href="https://www.acccess.eu/events" target="_blank" rel="noopener">Events</a>
+      </nav>
+    </div>
+    <div class="strip" id="strip"></div>
+    <h1>The EU Chips Act <em>pilot lines</em>: who is open, and how to get in</h1>
+    <p class="lede" id="lede"></p>
+    <div class="ctas">
+      <a class="pb solid" href="#radar">See the readiness radar</a>
+      <a class="pb ghost" href="https://www.acccess.eu/network" target="_blank" rel="noopener">Find your competence centre ↗</a>
+    </div>
+    <div class="alphanote" id="alphanote"></div>
+  </div>
+</header>
+
+<div class="rail"><div class="in">
+  <nav aria-label="Sections" id="rail">
+    <a href="#overview">Overview</a>
+    <a href="#radar">Radar</a>
+    <a href="#lines">The 11 lines</a>
+    <a href="#timeline">Timeline</a>
+    <a href="#access">Access via centres</a>
+    <a href="#news">News</a>
+    <a href="#events">Events</a>
+    <a href="#feedback">Feedback</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</div></div>
+
+<main>
+  <section class="band" id="overview"><div class="in">
+    <p class="eyebrow">At a glance</p>
+    <h2>Eleven lines, four already taking external users</h2>
+    <p class="sub">Five semiconductor pilot lines from the first Chips for Europe call and six quantum lines that started in 2026. Access has to be transparent and non-discriminatory, with preferential terms for SMEs, start-ups and academia.</p>
+    <div class="stats" id="stats"></div>
+    <div class="grid2">
+      <div class="callout watch" id="watch" style="margin:0"></div>
+      <div>
+        <h3 class="sh" style="margin-top:0">What comes next</h3>
+        <div class="scroll"><table id="nextTbl"></table></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="band" id="radar"><div class="in">
+    <p class="eyebrow">Readiness radar</p>
+    <h2>Where each line stands on the road to open access</h2>
+    <p class="sub">The centre is full open access with external users; the outer ring is lines in their first funding phase. Click a dot to open the line's card.</p>
+    <div class="grid2">
+      <div class="radar" id="radarSvg"></div>
+      <div>
+        <div class="ringkey" id="ringKey"></div>
+        <div class="legend" id="sectorLegend"></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="band" id="lines"><div class="in">
+    <p class="eyebrow">The 11 lines</p>
+    <h2>What each line offers today and what comes next</h2>
+    <p class="sub">Budgets are total public and private funding; quantum figures cover the first specific grant. "Via competence centres" shows the link each line has with the national centres.</p>
+    <div class="filters" id="fSec" role="group" aria-label="Filter lines by technology"></div>
+    <div class="cards" id="cards"></div>
+  </div></section>
+
+  <section class="band" id="timeline"><div class="in">
+    <p class="eyebrow">Timeline</p>
+    <h2>When external users get in</h2>
+    <p class="sub">Shaded bars show services open to external users today; diamonds are announced milestones; dashed boxes are planned access without an exact date.</p>
+    <div class="tl scroll" id="tlSvg"></div>
+  </div></section>
+
+  <section class="band access" id="access"><div class="in">
+    <p class="eyebrow">Access via the competence centres</p>
+    <h2>Your way in: the national Chips Competence Centres</h2>
+    <p class="sub" id="accLede"></p>
+    <div class="grid3" id="ctaGrid"></div>
+    <div class="callout" id="webinars"></div>
+    <h3 class="sh">Entry points, pricing and links to the centres</h3>
+    <div class="scroll"><table id="entryTbl"></table></div>
+    <h3 class="sh">How national centres organise pilot-line access</h3>
+    <div class="scroll"><table id="modelTbl"></table></div>
+    <div class="callout" id="legal"></div>
+  </div></section>
+
+  <section class="band" id="news"><div class="in">
+    <p class="eyebrow">News</p>
+    <h2>What the pilot lines announced</h2>
+    <p class="sub" id="newsSub"></p>
+    <div class="filters" id="fType" role="group" aria-label="Filter news by type"></div>
+    <div class="scroll"><table id="newsTbl"></table></div>
+  </div></section>
+
+  <section class="band" id="events"><div class="in">
+    <p class="eyebrow">Events and deadlines</p>
+    <h2>Where to meet the lines</h2>
+    <p class="sub">Roadshows, webinars with competence centres, schools and calls that depend on the pilot lines.</p>
+    <div class="scroll"><table id="evTbl"></table></div>
+  </div></section>
+
+  <section class="band" id="feedback"><div class="in">
+    <p class="eyebrow">Alpha</p>
+    <h2>Help us get it right</h2>
+    <p class="sub" id="fbIntro"></p>
+    <ol class="fbq" id="fbList"></ol>
+    <div class="callout" id="fbContact"></div>
+  </div></section>
+
+  <section class="band" id="sources"><div class="in">
+    <p class="eyebrow">Sources</p>
+    <h2>Sources and method</h2>
+    <p class="sub" id="method"></p>
+    <ul class="src" id="srcList"></ul>
+  </div></section>
+</main>
+
+<footer class="site-foot">
+  <div class="in">
+    <div>
+      <h4>EU Pilot Lines Monitor</h4>
+      <p>An independent weekly view of the EU Chips Act pilot lines, prepared by the Czech National Semiconductor Cluster, a partner in the aCCCess network action. It is not an official publication of aCCCess, the Chips JU, the European Commission or the pilot lines.</p>
+      <p class="foot" id="foot"></p>
+    </div>
+    <div>
+      <h4>In the aCCCess network</h4>
+      <ul>
+        <li><a href="https://www.acccess.eu/" target="_blank" rel="noopener">acccess.eu</a></li>
+        <li><a href="https://www.acccess.eu/network" target="_blank" rel="noopener">Competence centres</a></li>
+        <li><a href="https://www.acccess.eu/technologies" target="_blank" rel="noopener">Technology Advisor</a></li>
+        <li><a href="https://www.acccess.eu/trainings" target="_blank" rel="noopener">Trainings</a></li>
+        <li><a href="https://www.acccess.eu/open-calls" target="_blank" rel="noopener">Open calls</a></li>
+        <li><a href="https://www.acccess.eu/events" target="_blank" rel="noopener">Events</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script type="application/json" id="monitor-data">
+{
+  "meta": {"edition": "W40/2026", "updated": "2026-10-04", "author": "Stanislav Černý", "org": "Czech National Semiconductor Cluster", "lede": "Where the 11 pilot lines of the EU Chips Act stand on the road to open access, what they offer today, and how to reach them through the network of Chips Competence Centres. Updated weekly from the lines' own channels, CORDIS and the Chips JU."},
+  "stats": [
+    {"v": "11", "l": "pilot lines", "s": "5 semiconductor, 6 quantum"},
+    {"v": "4", "l": "take external users today", "s": "open access: FAMES, APECS; early access: NanoIC, PIXEurope"},
+    {"v": "1", "l": "preparing access", "s": "WBG Pilot Line; no public call yet"},
+    {"v": "6", "l": "in ramp-up", "s": "first grants started in 2026; access from 2027 or not yet dated"}
+  ],
+  "sectors": [
+    {"id": "logic", "name": "Logic & memory", "short": "Logic & memory", "color": "var(--logic)"},
+    {"id": "pack", "name": "Packaging & integration", "short": "Packaging", "color": "var(--pack)"},
+    {"id": "phot", "name": "Photonics", "short": "Photonics", "color": "var(--phot)"},
+    {"id": "power", "name": "Power / wide-bandgap", "short": "Power (WBG)", "color": "var(--power)"},
+    {"id": "quant", "name": "Quantum", "short": "Quantum", "color": "var(--quant)"}
+  ],
+  "rings": [
+    {"n": 1, "name": "Open access running", "desc": "Calls or one-stop-shop requests accepted; external projects under way."},
+    {"n": 2, "name": "Early access", "desc": "Design kits, consulting, training or prototyping offered before full capacity."},
+    {"n": 3, "name": "Preparing access", "desc": "Infrastructure and third-party access rules being set up; no public call yet."},
+    {"n": 4, "name": "Ramp-up", "desc": "First specific grant started in 2026; external access announced for 2027 or later, or not dated."}
+  ],
+  "lines": [
+    {"id": "fames", "name": "FAMES", "sector": "logic", "ring": 1, "tech": "FD-SOI 10/7 nm, embedded NVM, RF, 3D, power management", "coord": "CEA-Leti", "budget": "€830M", "consortium": "11 partners · 8 countries", "start": "Dec 2023", "status": "Inaugurated 30 Jan 2026. Annual open access call (2026: 9 Mar–22 May). First named industrial user Quobly announced 29 Sep 2026.", "now": "10 nm FD-SOI pathfinding PDK (Release 1), free under NDA and design-kit licence; spontaneous requests any time.", "next": "AlN/ScAlN RF filters and PCM RF switches Q4 2026; analog/RF PDK Release 2 Q1 2027; next call Mar–May 2027.", "entry": "Open Access Committee (open-access-chair@fames-pilot-line.eu)", "pricing": "Per project; SME, start-up and academic requests get a ranking bonus when oversubscribed", "ccc": "Access guidelines name competence centres as helpers for submitting requests", "web": "https://fames-pilot-line.eu/open-access/", "li": "https://www.linkedin.com/company/fames-pilot-line/", "tl": [{"k": "open", "s": "2026-01-01", "e": "2028-12-31", "l": "PDK 10 nm, annual calls, spontaneous requests"}]},
+    {"id": "nanoic", "name": "NanoIC", "sector": "logic", "ring": 2, "tech": "Beyond-2 nm logic, memory and interconnect", "coord": "imec", "budget": "€2.5B", "consortium": "6 partners · 6 countries", "start": "Jan 2024", "status": "Inaugurated 9 Feb 2026. High-NA EUV (EXE:5200) installed; qualification targeted Q4 2026, described as nearing completion in Sep 2026.", "now": "PDKs via Europractice: N2, A14 logic, eDRAM, fine-pitch RDL, die-to-wafer hybrid bonding. Free for academia and start-ups.", "next": "Hardware prototyping for external users from 2028.", "entry": "Europractice PDK desk (imecpdk@imec.be)", "pricing": "PDKs free for academia and start-ups; hardware pricing not published", "ccc": "Courses developed with competence centres; internships", "web": "https://www.nanoic-project.eu/en/access", "li": "https://www.linkedin.com/company/nanoic-pilot-line/", "tl": [{"k": "open", "s": "2026-01-01", "e": "2028-12-31", "l": "PDKs only (N2, A14, RDL)"}, {"k": "plan", "s": "2028-01-01", "e": "2028-12-31", "l": "prototyping"}]},
+    {"id": "apecs", "name": "APECS", "sector": "pack", "ring": 1, "tech": "Advanced packaging, chiplets, heterogeneous integration", "coord": "Fraunhofer / FMD", "budget": "€730M", "consortium": "10 partners · 8 countries", "start": "Dec 2024", "status": "First quasi-monolithic integration milestone (May 2026). First Open Access Call ran 1 Apr–30 Jun 2026. Interposer platform (silicon, organic, glass) shown at FIRST, Berlin, 30 Sep–1 Oct 2026.", "now": "One-Stop-Shop Office: characterisation, test and reliability; MPW; integration and packaging; photonic and passive components. Entry at any stage from idea to medium-volume manufacturing.", "next": "Roadshow Graz and Klagenfurt 7–8 Oct 2026; next call not yet announced.", "entry": "One-Stop-Shop Office (experts@apecs.eu)", "pricing": "Paid services; price list not published", "ccc": "Roadshows co-hosted with national centres and clusters (ChipNL, AT-C³)", "web": "https://www.apecs.eu/en/open-access.html", "li": "https://www.linkedin.com/company/apecs-pilot-line/", "tl": [{"k": "open", "s": "2026-04-01", "e": "2028-12-31", "l": "One-Stop-Shop, first call Apr–Jun 2026"}]},
+    {"id": "pix", "name": "PIXEurope", "sector": "phot", "ring": 2, "tech": "Photonic ICs: Si, SiN, InP, LNOI, SiC and hybrid integration", "coord": "ICFO", "budget": "≈€400M", "consortium": "20 partners · 11 countries", "start": "Jun 2025", "status": "Public launch 21 May 2026; four of five service lines live. Three new facilities under construction and eight being upgraded.", "now": "Consultancy, training, prototyping and collaborative R&D through a single central gateway.", "next": "Existing partner infrastructure Nov 2026; ≥50% of new equipment accepted by May 2027; full capacity with MPW in 2028 (all equipment by Sep 2028).", "entry": "Single Central Gateway (pixeurope.eu/open-access)", "pricing": "Depends on eligibility, platform, wafer size and partner terms; not published", "ccc": "Training with PIXSpain at ECOC 2026; paired webinar with PIXSpain 29 Oct", "web": "https://pixeurope.eu/open-access/", "li": "https://www.linkedin.com/company/pixeurope/", "tl": [{"k": "open", "s": "2026-05-21", "e": "2028-12-31", "l": ""}, {"k": "mile", "s": "2026-11-01", "l": "partner infra"}, {"k": "mile", "s": "2027-05-01", "l": "50% equipment"}, {"k": "mile", "s": "2028-05-01", "l": "full + MPW"}]},
+    {"id": "wbg", "name": "WBG Pilot Line", "sector": "power", "ring": 3, "tech": "SiC, GaN and ultra-wide-bandgap power and RF devices", "coord": "CNR-IMM Catania", "budget": "€360M", "consortium": "15 RTOs · 7 countries", "start": "Jun 2025", "status": "Launched Sep 2025. New Catania site awaiting permits (Dec 2025). Consortium preparing third-party access on partners' existing tools (Jun 2026).", "now": "Contact and early engagement; access portal online.", "next": "No public call announced.", "entry": "Access portal (wbg-access.fbk.eu)", "pricing": "Not published", "ccc": "No formal link found", "web": "https://www.wbg-pilot-line.eu/", "li": "https://www.linkedin.com/company/wbg-pilot-line/", "tl": [{"k": "none", "l": "access being prepared, no date"}]},
+    {"id": "champion", "name": "CHAMP-ION", "sector": "quant", "ring": 4, "tech": "Ion-trap chips: surface, monolithic, stacked and MEMS traps", "coord": "Silicon Austria Labs", "budget": "€50M", "consortium": "21 partners · 6 countries", "start": "Mar 2026", "status": "Opening event 27 May 2026; website live Sep 2026.", "now": "Early engagement with users.", "next": "Initial access early 2028, then standard service packages (MPW, design support, packaging, validation).", "entry": "Single entry point (champ-ion.eu)", "pricing": "Not published", "ccc": "No formal link found", "web": "https://champ-ion.eu/", "li": "https://www.linkedin.com/company/champ-ion/", "tl": [{"k": "plan", "s": "2028-01-01", "e": "2028-03-31", "l": "early 2028"}]},
+    {"id": "supreme", "name": "SUPREME", "sector": "quant", "ring": 4, "tech": "Superconducting qubits, Josephson junctions on 200 mm, 3D integration", "coord": "VTT", "budget": "€50M", "consortium": "23 partners · 8 countries", "start": "Apr 2026", "status": "Kick-off 13 May 2026; seventh project month in Sep 2026.", "now": "Early engagement with users.", "next": "External user access in 2027: PDKs, shared fabrication runs, service office.", "entry": "supreme-quantum.eu", "pricing": "Licensed services; not published", "ccc": "No formal link found", "web": "https://supreme-quantum.eu/", "li": "https://www.linkedin.com/company/supreme-pilot-line/", "tl": [{"k": "plan", "s": "2027-01-01", "e": "2027-12-31", "l": "2027"}]},
+    {"id": "spins", "name": "SPINS", "sector": "quant", "ring": 4, "tech": "Spin qubits on 300 mm (SOI, Si/SiGe, Ge)", "coord": "imec", "budget": "≈€50M", "consortium": "25 partners", "start": "Apr 2026", "status": "Launched Apr 2026 with start-up lead users.", "now": "Early engagement with users.", "next": "MPW runs and quantum PDKs for start-ups and SMEs; date not announced.", "entry": "imec", "pricing": "Not published", "ccc": "No formal link found", "web": "https://www.imec-int.com/en/press/semiconductor-based-quantum-pilot-line-spins-launched-eu-support", "li": "https://www.linkedin.com/company/spins-pilot-line/", "tl": [{"k": "none", "l": "date not announced"}]},
+    {"id": "p4q", "name": "P4Q", "sector": "quant", "ring": 4, "tech": "Photonics for quantum: SiN, TFLN, AlOx, quantum-dot sources", "coord": "University of Twente", "budget": "€51.5M", "consortium": "29 partners · 12 countries", "start": "Apr 2026", "status": "Kick-off May 2026. Partner AlOx platform already available.", "now": "Early engagement with users.", "next": "PDKs and ADKs; date not announced.", "entry": "photonics4quantum.eu", "pricing": "Not published", "ccc": "No formal link found", "web": "https://www.photonics4quantum.eu/", "li": "https://www.linkedin.com/company/photonics4quantum/", "tl": [{"k": "none", "l": "date not announced"}]},
+    {"id": "qplanet", "name": "Q-PLANET", "sector": "quant", "ring": 4, "tech": "Neutral-atom chips: lasers, atom chips, vapour cells", "coord": "Pasqal", "budget": "€50M", "consortium": "28 partners · 11 countries", "start": "May 2026", "status": "Kick-off 8–9 Jul 2026; grant signed 18 Sep 2026.", "now": "Early engagement with users.", "next": "Open PDKs and ADKs; date not announced.", "entry": "q-planet.eu", "pricing": "Not published", "ccc": "No formal link found", "web": "https://www.q-planet.eu/", "li": "https://www.linkedin.com/company/q-planet-pilot-line/", "tl": [{"k": "none", "l": "date not announced"}]},
+    {"id": "direqt", "name": "DIREQT", "sector": "quant", "ring": 4, "tech": "Diamond quantum technologies", "coord": "CNR", "budget": "€50M", "consortium": "31 partners · 13 countries", "start": "Jul 2026", "status": "Grant signed 4 Sep 2026; no public launch yet.", "now": "Not yet engaging users publicly.", "next": "Open-access framework announced; date not announced.", "entry": "No website yet", "pricing": "Not published", "ccc": "No formal link found", "web": "https://cordis.europa.eu/project/id/101291215", "li": "", "tl": [{"k": "none", "l": "date not announced"}]}
+  ],
+  "newsTypes": [
+    {"id": "roadmap", "name": "Roadmap", "desc": "Published plans, infrastructure schedules, access dates"},
+    {"id": "service", "name": "New service", "desc": "New PDK, platform, service line or access route"},
+    {"id": "event", "name": "Event", "desc": "Conferences, roadshows, trainings, webinars"},
+    {"id": "milestone", "name": "Milestone", "desc": "Inaugurations, first users, tools installed, launches"}
+  ],
+  "news": [
+    {"d": "2026-10-01", "a": false, "line": "NanoIC", "t": "Article on early-access PDKs: pathfinding PDKs for logic beyond 2 nm and system-exploration PDKs for memory and interconnect, with access steps.", "u": "https://www.linkedin.com/company/nanoic-pilot-line/posts/", "ty": "service", "c": ["pl"]},
+    {"d": "2026-09-30", "a": false, "line": "APECS", "t": "FIRST by FMD, Berlin: interposer platform with silicon, organic and glass substrates; companies can enter at any stage up to medium-volume manufacturing.", "u": "https://www.linkedin.com/company/apecs-pilot-line/posts/", "ty": "service", "c": ["pl"]},
+    {"d": "2026-09-29", "a": false, "line": "FAMES", "t": "Quobly gains access to FAMES through CEA-Leti for next-generation silicon quantum processors: first named industrial user.", "u": "https://www.linkedin.com/company/fames-pilot-line/posts/", "ty": "milestone", "c": ["pl"]},
+    {"d": "2026-09-28", "a": false, "line": "FAMES + NanoIC", "t": "Joint booths and open-access presentations at IWJT 2026, Grenoble.", "u": "https://www.linkedin.com/company/fames-pilot-line/posts/", "ty": "event", "c": ["pl"]},
+    {"d": "2026-09-27", "a": true, "line": "PIXEurope", "t": "Infrastructure plan published: 3 new facilities, 8 upgrades; ≥50% of equipment accepted by May 2027, 100% by Sep 2028. TNO's 6-inch InP line in Eindhoven tops out.", "u": "https://www.linkedin.com/company/pixeurope/posts/", "ty": "roadmap", "c": ["pl"]},
+    {"d": "2026-09-27", "a": true, "line": "FAMES", "t": "Brochure for the 10 nm FD-SOI pathfinding PDK released.", "u": "https://www.linkedin.com/company/fames-pilot-line/posts/", "ty": "service", "c": ["pl"]},
+    {"d": "2026-09-27", "a": true, "line": "Q-PLANET", "t": "Coordinator video on goals: €49M, 28 partners, three years; Centrale Lille/IEMN to host a second vapour-cell production centre.", "u": "https://www.linkedin.com/company/q-planet-pilot-line/posts/", "ty": "milestone", "c": ["pl"]},
+    {"d": "2026-09-23", "a": false, "line": "PIXEurope", "t": "Training with the Spanish competence centre PIXSpain alongside ECOC, Málaga, on access to pilot prototyping.", "u": "https://www.linkedin.com/company/pixeurope/posts/", "ty": "event", "c": ["pl", "ccc"]},
+    {"d": "2026-09-23", "a": false, "c": ["ccc", "pl"], "ty": "event", "line": "SCCC", "t": "Swedish centre's webinar on the WBG pilot line; 2D pilot line webinar follows on 13 Oct.", "u": "https://sccc.se/"},
+    {"d": "2026-09-21", "a": false, "line": "FAMES", "t": "First FAMES Academy short course in Grenoble: 13 speakers, including open-access mechanisms.", "u": "https://www.linkedin.com/company/fames-pilot-line/posts/", "ty": "event", "c": ["pl"]},
+    {"d": "2026-09-20", "a": true, "line": "NanoIC", "t": "High-NA EUV tool described as nearing completion.", "u": "https://www.linkedin.com/company/nanoic-pilot-line/posts/", "ty": "milestone", "c": ["pl"]},
+    {"d": "2026-09-16", "a": false, "line": "All five + EuroCDP", "t": "Flanders Semiconductor Forum, organised by the competence centre FC3: all five lines and the design platform present services and access in one day.", "u": "https://www.linkedin.com/company/pixeurope/posts/", "ty": "event", "c": ["pl", "ccc", "cdp"]},
+    {"d": "2026-09-14", "a": false, "line": "WBG", "t": "E-MRS Fall Meeting, Warsaw: dedicated session and booth; no access news.", "u": "https://www.linkedin.com/company/wbg-pilot-line/posts/", "ty": "event", "c": ["pl"]},
+    {"d": "2026-09-13", "a": true, "line": "CHAMP-ION", "t": "Website champ-ion.eu goes live.", "u": "https://www.linkedin.com/company/champ-ion/posts/", "ty": "milestone", "c": ["pl"]},
+    {"d": "2026-09-10", "a": false, "line": "All five + Chips JU", "t": "IEEE ESTC, Helsinki: special session on the status of the first five lines and plans for the next 12 months.", "u": "https://www.linkedin.com/company/pixeurope/posts/", "ty": "roadmap", "c": ["pl"]},
+    {"d": "2026-09-07", "a": false, "line": "FAMES + NanoIC", "t": "ESSERC, Palma: strong academic interest in open access and PDKs.", "u": "https://www.linkedin.com/company/fames-pilot-line/posts/", "ty": "event", "c": ["pl"]},
+    {"d": "2026-06-09", "a": false, "line": "WBG + IPCEI AST", "t": "VDI/VDE panel 'IPCEI AST meets the Chips JU Pilot Lines' on cooperation between lines and IPCEI AST companies.", "u": "https://www.linkedin.com/company/wbg-pilot-line/posts/", "ty": "event", "c": ["pl"]}
+  ],
+  "events": [
+    {"d": "2026-10-05", "when": "5 Oct 2026, 15:30–17:30 CEST", "what": "Chips JU consultation for Work Programme 2027: EU material and equipment qualification on pilot lines (online)", "why": "Shapes future pilot-line call topics", "u": "https://www.linkedin.com/company/chips-ju/posts/", "c": ["pl"]},
+    {"d": "2026-10-07", "when": "7–8 Oct 2026", "what": "APECS roadshow, Graz and Klagenfurt, with Silicon Alps and AT-C³", "why": "Meet the APECS one-stop-shop", "u": "https://www.apecs.eu/en/access/roadshows.html", "c": ["pl"]},
+    {"d": "2026-10-12", "when": "12 Oct 2026, 13:00–16:00 CET", "what": "Webinar 'Your Gateway to European Semiconductor Technologies' (CSC, SK Chips, CC Chip.si with PIXEurope, NanoIC, EuroCDP)", "why": "Three competence centres with two lines and the design platform", "u": "https://www.acccess.eu/events/your-gateway-to-european-semiconductor-technologies-cccs-pilot-lines-eurocdp", "c": ["ccc", "pl", "cdp"]},
+    {"d": "2026-10-13", "c": ["ccc", "pl"], "when": "13 Oct 2026", "what": "SCCC webinar on the 2D pilot line", "why": "Centre presents a pilot line", "u": "https://sccc.se/"},
+    {"d": "2026-10-29", "when": "29 Oct 2026", "what": "aCCCess Technology Offers #4: PIXEurope with PIXSpain", "why": "Line paired with a competence centre", "u": "https://www.acccess.eu/events/acccess-webinar-on-technology-offers-4", "c": ["acc", "ccc", "pl"]},
+    {"d": "2026-11-01", "when": "Nov 2026", "what": "PIXEurope opens existing partner infrastructure", "why": "First hardware access for photonics", "u": "https://pixeurope.eu/open-access/", "c": ["pl"]},
+    {"d": "2026-11-10", "when": "10–13 Nov 2026", "what": "SEMICON Europa, Munich: Chips JU booth C2311 with all five lines, aCCCess and EuroCDP", "why": "Every line in one place", "u": "https://www.linkedin.com/company/chips-ju/posts/", "c": ["pl", "cdp", "ccc", "acc"]},
+    {"d": "2026-11-17", "when": "17 Nov 2026", "what": "Deadline EuroHPC QEXP-14 (€15M), bridge to the quantum pilot lines", "why": "Quantum funding", "u": "https://www.eurohpc-ju.europa.eu/quantum-experimental-pilot-lines-quantum-technologies_en", "c": ["pl"]},
+    {"d": "2026-11-25", "when": "25–27 Nov 2026", "what": "NanoIC Student Excellence Day and Winter School on Embedded Memories, imec Leuven (free for students)", "why": "Skills", "u": "https://www.linkedin.com/company/nanoic-pilot-line/posts/", "c": ["pl"]},
+    {"d": "2026-12-01", "when": "1 Dec 2026 – 31 Mar 2027 (to be confirmed)", "what": "Chips JU calls Quantum Chips Design and Quantum Enabling Technologies", "why": "Require access arrangements with a pilot line", "u": "https://qt.eu/funding-opportunities/", "c": ["pl"]},
+    {"d": "2026-12-02", "when": "2–3 Dec 2026", "what": "EFECS 2026, Helsinki (Chips JU)", "why": "Meet lines and Chips JU", "u": "https://efecs.eu/", "c": ["pl", "cdp", "ccc"]},
+    {"d": "2027-01-25", "when": "25–29 Jan 2027", "what": "European FD-SOI Design School, Grenoble (FAMES)", "why": "Skills", "u": "https://www.linkedin.com/company/fames-pilot-line/posts/", "c": ["pl"]},
+    {"d": "2027-03-01", "when": "Mar–May 2027", "what": "FAMES annual open access call", "why": "Main window for new FAMES projects", "u": "https://fames-pilot-line.eu/open-access/", "c": ["pl"]}
+  ],
+  "next": [
+    {"d": "2026-11", "when": "Nov 2026", "c": "pl", "t": "PIXEurope opens existing partner infrastructure"},
+    {"d": "2026-12", "when": "Q4 2026", "c": "pl", "t": "NanoIC High-NA EUV qualification; FAMES RF filter and PCM switch PDKs"},
+    {"d": "2027-03", "when": "Mar–May 2027", "c": "pl", "t": "FAMES annual open access call"},
+    {"d": "2027-05", "when": "May 2027", "c": "pl", "t": "PIXEurope: ≥50% of new equipment accepted"},
+    {"d": "2027-06", "when": "2027", "c": "pl", "t": "SUPREME opens to external users"},
+    {"d": "2028-02", "when": "Early 2028", "c": "pl", "t": "CHAMP-ION initial access; NanoIC hardware prototyping from 2028"},
+    {"d": "2028-09", "when": "Sep 2028", "c": "pl", "t": "PIXEurope fully equipped, MPW available"}
+  ],
+  "access": {"lede": "Every EU Member State and Norway has a Chips Competence Centre. Under the Chips Act the centres help companies, start-ups and researchers reach the pilot lines, and the aCCCess network action connects all 30 of them.", "ctas": [{"t": "Find your national centre", "p": "30 centres in 28 countries, each with a contact for pilot-line access.", "b": "Network", "u": "https://www.acccess.eu/network"}, {"t": "Ask the Technology Advisor", "p": "Describe what you need; the advisor routes the request to the centres that work on that technology.", "b": "Technologies", "u": "https://www.acccess.eu/technologies"}, {"t": "Check open calls", "p": "Active calls from pilot lines, the design platform, the centres and the Chips JU in one list.", "b": "Open calls", "u": "https://www.acccess.eu/open-calls"}], "webinars": {"t": "Technology Offers webinars", "n": "Each session pairs a pilot line with a centre: APECS with ChipNL (May), FAMES with ASTEERICS and EuroCDP (Jul), PIXEurope with PIXSpain (29 Oct)", "u": "https://www.acccess.eu/events"}},
+  "models": [
+    {"cc": "SCCC + Vinnova", "ctry": "SE", "model": "Funds access fees", "what": "SMEs get up to SEK 3.5M per project for pilot-line access fees, conditional on an access certificate from the line (Feb 2026 – Jul 2027).", "u": "https://www.vinnova.se/en/calls-for-proposals/chips-ju/chips-ju-testing-and-validation-of-new-2025-04692/"},
+    {"cc": "FC3", "ctry": "BE", "model": "All-lines forum", "what": "Flanders Semiconductor Forum, 16 Sep 2026: all five lines and EuroCDP present services and access in one free day.", "u": "https://fc3.be/fsf2026/"},
+    {"cc": "PIXSpain", "ctry": "ES", "model": "Joint training", "what": "Training with PIXEurope alongside ECOC 2026; paired aCCCess webinar 29 Oct.", "u": "https://www.linkedin.com/company/pixeurope/posts/"},
+    {"cc": "ChipNL", "ctry": "NL", "model": "Guided applications", "what": "Guides companies through pilot-line and design-platform applications; Dutch contact point for APECS.", "u": "https://cccnl.nl/en/pilot-lines"},
+    {"cc": "G3C", "ctry": "DE", "model": "Free navigation", "what": "Run by FMD, which also operates the APECS one-stop-shop; free first consultation and facilitated access.", "u": "https://www.german-chips.de/en/about-us.html"},
+    {"cc": "AT-C³", "ctry": "AT", "model": "Co-hosted roadshow", "what": "Co-hosts the APECS roadshow in Graz and Klagenfurt; services free or reduced for SMEs, published price lists.", "u": "https://www.apecs.eu/en/access/roadshows.html"},
+    {"cc": "ASTEERICS", "ctry": "FR", "model": "Training + priority access", "what": "Free training offer; joint aCCCess webinar with FAMES, Jul 2026.", "u": "https://www.acccess.eu/news"}
+  ],
+  "legal": [
+    "Regulation (EU) 2023/1781, recital 29: competence centres facilitate access to pilot lines and the design platform and act as an access point to the network.",
+    "Recital 18: access on a transparent, non-discriminatory basis; large companies pay market or cost-plus prices; SMEs and academia get preferential access or reduced prices.",
+    "Chips JU Work Programme (decision GB 2023.51): pilot lines must facilitate collaboration with competence centres; PDKs must be available through the European design platform.",
+    "Chips Act 2.0 proposal COM(2026) 504: pilot lines continue; at least one competence centre per Member State provides access to design and pilot-line facilities."
+  ],
+  "feedback": {"banner": "Alpha version, open for feedback until 1 November 2026. Corrections are applied every week.", "intro": "This page is an independent view of the EU Chips Act pilot lines, built to sit alongside the aCCCess network of competence centres. It reports what the lines publish. Tell us what is wrong, what is missing and what would make it useful.", "questions": [["Accuracy", "Is your pilot line described correctly? What is missing or out of date?"], ["Readiness scale", "Do the four levels (open access running, early access, preparing access, ramp-up) describe readiness well? Which criteria should define each level?"], ["Indicators", "Which two or three indicators would help you most? For example external users, access requests and lead times, published price conditions, PDKs on the design platform, referrals from competence centres."], ["Competence centres", "Which centre helped you reach a pilot line? Which link between a line and a centre is missing here?"], ["Data contribution", "Would your pilot line send a short monthly status line?"], ["Home", "Should this page stay independent, or be hosted or endorsed by the aCCCess network or the Chips JU?"]], "contactNote": "Short answers are enough; a correction can be one line. Please mention which pilot line or centre you refer to.", "email": "cerny@semicz.eu"},
+  "sources": [
+    ["CORDIS project pages (FAMES, NanoIC, APECS, WBG, PIXEurope, CHAMP-ION, SUPREME, P4Q, Q-PLANET, DIREQT)", "https://cordis.europa.eu/"],
+    ["European Commission: FAMES inauguration, 30 Jan 2026", "https://digital-strategy.ec.europa.eu/en/news/fames-pilot-line-inaugurated-advance-ultra-low-power-semiconductors-europe"],
+    ["NanoIC access and PDKs", "https://www.nanoic-project.eu/en/access"],
+    ["Chips JU: APECS Open Access Call", "https://www.chips-ju.europa.eu/NewsDetails/?id=a262f8c6-c738-f111-88b5-000d3a27d474"],
+    ["imec: PIXEurope launch, 4 Jun 2026", "https://www.imec-int.com/en/press/europes-bid-leadership-photonic-chips-begins-barcelona"],
+    ["Fraunhofer IISB: WBG consortium meeting, Jun 2026", "https://www.iisb.fraunhofer.de/de/press_media/pressemitteilungen/pressearchiv/archiv_2026/wbg-treffen-06-2026.html"],
+    ["champ-ion.eu", "https://champ-ion.eu/"],
+    ["Chips JU Work Programme appendix (pilot-line access conditions)", "https://www.chips-ju.europa.eu/Appendix2_2023I_Initiatives.pdf"],
+    ["aCCCess news and events", "https://www.acccess.eu/news"],
+    ["Pilot-line LinkedIn company pages (see each card)", "https://www.linkedin.com/company/chips-ju/"],
+    ["aCCCess network of competence centres", "https://www.acccess.eu/network"],
+    ["Chips JU Annual Activity Report: competence centres", "https://aar2024.chips-ju.europa.eu/annual-report/competence-centres"],
+    ["aCCCess open calls", "https://www.acccess.eu/open-calls"],
+    ["aCCCess events", "https://www.acccess.eu/events"]
+  ],
+  "method": "Compiled from the pilot lines' websites and LinkedIn company pages, CORDIS, the Chips JU, aCCCess and the competence centres' channels, and partner press releases. Each weekly edition adds new items and changes only the facts they affect. Dates marked ≈ are derived from the relative age of a post."
+}
+</script>
+
+<script>
+(function(){
+  try { if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed'); } catch (e) {}
+  const D = JSON.parse(document.getElementById('monitor-data').textContent);
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const $ = id => document.getElementById(id);
+  const sec = Object.fromEntries(D.sectors.map(s => [s.id, s]));
+  const ringCls = n => 'r' + n;
+  const ringName = n => (D.rings.find(r => r.n === n) || {}).name || '';
+  const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const fmt = (iso, approx) => { const [y,m,d] = iso.split('-').map(Number); return (approx ? '≈ ' : '') + (d ? d + ' ' : '') + MON[m-1] + ' ' + y; };
+  const lnk = (u, t) => u ? '<a href="'+esc(u)+'" target="_blank" rel="noopener">'+(t || '↗')+'</a>' : '';
+  const today = D.meta.updated;
+  const linked = l => !/^no formal link/i.test(l.ccc || '');
+
+  // header and footer
+  $('strip').innerHTML = '<span><b>' + esc(D.meta.org) + '</b></span><span>Edition ' + esc(D.meta.edition) + ' · ' + esc(fmt(today)) + '</span><span>prepared by ' + esc(D.meta.author) + '</span>';
+  $('lede').textContent = D.meta.lede;
+  $('alphanote').innerHTML = '<span class="alpha">alpha</span><span>'+esc(D.feedback.banner)+'</span><a href="#feedback">Give feedback</a>';
+  $('foot').textContent = 'Edition ' + D.meta.edition + ' · updated ' + fmt(today) + ' · prepared by ' + D.meta.author;
+
+  // section rail: highlight the section in view
+  const railLinks = [...$('rail').querySelectorAll('a')];
+  const setCur = id => railLinks.forEach(a => a.setAttribute('aria-current', String(a.getAttribute('href') === '#' + id)));
+  setCur('overview');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting) setCur(e.target.id); }); }, {rootMargin:'-45% 0px -50% 0px'});
+    document.querySelectorAll('main section.band').forEach(s => io.observe(s));
+  }
+
+  // overview
+  $('stats').innerHTML = D.stats.map(s => '<div class="stat"><div class="v">'+esc(s.v)+'</div><div class="l">'+esc(s.l)+'</div><div class="s">'+esc(s.s)+'</div></div>').join('');
+  const TY = Object.fromEntries(D.newsTypes.map(t => [t.id, t]));
+  const tyTag = id => '<span class="ty ty-'+esc(id)+'">'+esc((TY[id] || {}).name || id)+'</span>';
+  const hot = D.news.filter(n => n.ty === 'roadmap' || n.ty === 'service').slice(0, 5);
+  $('watch').innerHTML = '<h3>Roadmaps and new services</h3>' + (hot.length
+    ? '<ul>' + hot.map(n => '<li><b>'+esc(n.line)+'</b> · '+esc(fmt(n.d, n.a))+' '+tyTag(n.ty)+'<br>'+esc(n.t)+'</li>').join('') + '</ul>'
+    : '<p class="note">No new roadmap or service announcements this week.</p>');
+  $('nextTbl').innerHTML = '<thead><tr><th>When</th><th>Milestone</th></tr></thead><tbody>' +
+    D.next.filter(x => x.d >= today.slice(0,7)).map(x => '<tr><td class="d">'+esc(x.when)+'</td><td>'+esc(x.t)+'</td></tr>').join('') + '</tbody>';
+
+  // cards + sector filter
+  let fs = 'all';
+  $('cards').innerHTML = D.lines.map(l => '<article class="card" id="line-'+l.id+'" data-sec="'+l.sector+'" style="--c:'+sec[l.sector].color+'">' +
+    '<h3>'+esc(l.name)+'<span class="pill '+ringCls(l.ring)+'">'+esc(ringName(l.ring))+'</span></h3>' +
+    '<div class="meta">'+esc(l.tech)+'<br>'+esc(l.coord)+' · '+esc(l.budget)+' · '+esc(l.consortium)+' · since '+esc(l.start)+'</div>' +
+    '<dl><dt>Status</dt><dd>'+esc(l.status)+'</dd><dt>Available now</dt><dd>'+esc(l.now)+'</dd><dt>Next</dt><dd>'+esc(l.next)+'</dd><dt>Entry point</dt><dd>'+esc(l.entry)+'</dd>' +
+    '<dt>Via competence centres</dt><dd class="via">'+esc(l.ccc)+'</dd></dl>' +
+    '<div class="links">'+lnk(l.web, 'Website ↗')+lnk(l.li, 'LinkedIn ↗')+'<a class="cc" href="https://www.acccess.eu/technologies" target="_blank" rel="noopener">Find a centre for this technology ↗</a></div></article>').join('');
+  function renderSec(){
+    document.querySelectorAll('#cards .card').forEach(c => { c.hidden = !(fs === 'all' || c.dataset.sec === fs); });
+    [...$('fSec').querySelectorAll('button')].forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === fs)));
+  }
+  $('fSec').innerHTML = '<span class="lb">Technology</span><button type="button" data-v="all">All</button>' + D.sectors.map(s => '<button type="button" data-v="'+s.id+'">'+esc(s.name)+'</button>').join('');
+  $('fSec').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; fs = b.dataset.v; renderSec(); });
+  renderSec();
+  function openCard(id){
+    const el = $('line-' + id); if (!el) return;
+    if (el.hidden) { fs = 'all'; renderSec(); }
+    el.scrollIntoView({behavior:'smooth', block:'start'});
+    el.classList.add('flash'); setTimeout(() => el.classList.remove('flash'), 1600);
+  }
+
+  // radar
+  (function(){
+    const W = 780, C = W/2, R = [0, 78, 150, 214, 278];
+    const weights = {logic:1.1, pack:0.8, phot:0.8, power:0.8, quant:2.5};
+    const total = D.sectors.reduce((a,s) => a + weights[s.id], 0);
+    let ang = -Math.PI/2 - (weights.logic/total)*Math.PI;
+    const span = {};
+    D.sectors.forEach(s => { const w = weights[s.id]/total*2*Math.PI; span[s.id] = [ang, ang + w]; ang += w; });
+    let svg = '<svg viewBox="0 0 ' + W + ' ' + W + '" role="img" aria-label="Readiness radar of the EU pilot lines">';
+    for (let i = 4; i >= 1; i--) svg += '<circle cx="'+C+'" cy="'+C+'" r="'+R[i]+'" fill="'+(i%2? 'var(--panel2)':'var(--panel)')+'" stroke="var(--rule)" stroke-width="1.5"/>';
+    D.sectors.forEach(s => {
+      const a = span[s.id][0];
+      svg += '<line x1="'+C+'" y1="'+C+'" x2="'+(C+R[4]*Math.cos(a)).toFixed(1)+'" y2="'+(C+R[4]*Math.sin(a)).toFixed(1)+'" stroke="var(--rule)" stroke-width="1.5"/>';
+      const mid = (span[s.id][0]+span[s.id][1])/2, lr = R[4]+16;
+      const lx = C + lr*Math.cos(mid), ly = C + lr*Math.sin(mid);
+      const anchor = Math.abs(Math.cos(mid)) < .3 ? 'middle' : (Math.cos(mid) > 0 ? 'start' : 'end');
+      svg += '<text x="'+lx.toFixed(1)+'" y="'+(ly+4).toFixed(1)+'" text-anchor="'+anchor+'" font-size="15" font-weight="700" fill="'+s.color+'" font-family="Raleway,system-ui,sans-serif">'+esc(s.short || s.name)+'</text>';
+    });
+    for (let i = 1; i <= 4; i++) svg += '<text x="'+(C+4)+'" y="'+(C-R[i]+14)+'" font-size="11" fill="var(--faint)" font-family="ui-monospace,monospace">'+i+'</text>';
+    const groups = {};
+    D.lines.forEach(l => { const k = l.sector + '|' + l.ring; (groups[k] = groups[k] || []).push(l); });
+    Object.entries(groups).forEach(([k, arr]) => {
+      const [sid, ring] = k.split('|'); const [a0, a1] = span[sid]; const r = (R[ring-1] + R[ring]) / 2 + (ring == 1 ? 8 : 0);
+      arr.forEach((l, i) => {
+        const a = a0 + (a1 - a0) * (i + 1) / (arr.length + 1);
+        const x = C + r*Math.cos(a), y = C + r*Math.sin(a);
+        const right = Math.cos(a) >= 0;
+        svg += '<a href="#line-'+l.id+'" data-line="'+l.id+'" class="rlink"><circle class="dot" cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="7" fill="'+sec[sid].color+'" stroke="var(--panel)" stroke-width="2"><title>'+esc(l.name+' · '+ringName(l.ring))+'</title></circle>' +
+               '<text x="'+(x + (right? 11 : -11)).toFixed(1)+'" y="'+(y+4).toFixed(1)+'" text-anchor="'+(right?'start':'end')+'" font-size="15" font-weight="600" fill="var(--fg)" font-family="Raleway,system-ui,sans-serif">'+esc(l.name)+'</text></a>';
+      });
+    });
+    svg += '</svg>';
+    $('radarSvg').innerHTML = svg;
+    $('radarSvg').addEventListener('click', e => { const a = e.target.closest('a.rlink'); if (!a) return; e.preventDefault(); openCard(a.dataset.line); });
+    $('ringKey').innerHTML = D.rings.map(r => {
+      const who = D.lines.filter(l => l.ring === r.n).map(l => esc(l.name)).join(', ');
+      return '<div class="rk"><div class="n '+ringCls(r.n)+'">'+r.n+'</div><div><div class="t '+ringCls(r.n)+'">'+esc(r.name)+'</div><div class="d">'+esc(r.desc)+'</div><div class="who">'+who+'</div></div></div>';
+    }).join('');
+    $('sectorLegend').innerHTML = D.sectors.map(s => '<span><span class="sw" style="background:'+s.color+'"></span>'+esc(s.name)+'</span>').join('');
+  })();
+
+  // timeline
+  (function(){
+    const t = d => Date.parse(d)/864e5, t0 = t('2026-01-01'), t1 = t('2029-01-01');
+    const X0 = 170, X1 = 900, W = 940, rowH = 30, top = 56;
+    const X = d => X0 + (t(d)-t0)/(t1-t0)*(X1-X0);
+    const xn = X(today);
+    const H = top + D.lines.length*rowH + 70;
+    const F = ' font-family="Raleway,system-ui,sans-serif"';
+    let s = '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Access timeline of the EU pilot lines">';
+    ['2026','2027','2028'].forEach(y => { s += '<text x="'+X(y+'-07-01')+'" y="34" text-anchor="middle" font-size="13" font-weight="700" fill="var(--muted)"'+F+'>'+y+'</text>'; });
+    ['2026','2027','2028','2029'].forEach(y => { s += '<line x1="'+X(y+'-01-01')+'" x2="'+X(y+'-01-01')+'" y1="44" y2="'+(top+D.lines.length*rowH)+'" stroke="var(--rule)" stroke-width="1.5"/>'; });
+    D.lines.forEach((l, i) => {
+      const y = top + i*rowH + rowH/2, col = sec[l.sector].color;
+      s += '<text x="16" y="'+(y+4)+'" font-size="13.5" font-weight="600" fill="var(--fg)"'+F+'>'+esc(l.name)+'</text>';
+      l.tl.forEach(g => {
+        if (g.k === 'open') { s += '<rect x="'+X(g.s)+'" y="'+(y-8)+'" width="'+(X(g.e)-X(g.s))+'" height="16" rx="8" fill="'+col+'" fill-opacity=".22" stroke="'+col+'"/>';
+          if (g.l) s += '<text x="'+(Math.max(X(g.s), xn)+8)+'" y="'+(y+4)+'" font-size="12" fill="var(--fg)"'+F+'>'+esc(g.l)+'</text>'; }
+        else if (g.k === 'plan') { const w = X(g.e)-X(g.s); s += '<rect x="'+X(g.s)+'" y="'+(y-8)+'" width="'+w+'" height="16" rx="8" fill="none" stroke="var(--muted)" stroke-dasharray="4 3"/>' +
+          '<text x="'+(w < 60 ? X(g.e)+8 : X(g.s)+8)+'" y="'+(y+4)+'" font-size="12" fill="var(--fg)"'+F+'>'+esc(g.l)+'</text>'; }
+        else if (g.k === 'mile') { const x = X(g.s); s += '<path d="M'+x+' '+(y-7)+'l7 7l-7 7l-7 -7z" fill="'+col+'"/><text x="'+(x+10)+'" y="'+(y+4)+'" font-size="12" fill="var(--fg)"'+F+'>'+esc(g.l)+'</text>'; }
+        else { s += '<text x="'+(xn+8)+'" y="'+(y+4)+'" font-size="12" font-style="italic" fill="var(--muted)"'+F+'>'+esc(g.l)+'</text>'; }
+      });
+    });
+    const yb = top + D.lines.length*rowH;
+    s += '<line x1="'+xn+'" x2="'+xn+'" y1="44" y2="'+yb+'" stroke="var(--warn)" stroke-dasharray="4 4"/>';
+    s += '<text x="'+xn+'" y="'+(yb+18)+'" text-anchor="middle" font-size="12" font-weight="700" fill="var(--warn)"'+F+'>today · '+esc(fmt(today))+'</text>';
+    const ly = yb + 46;
+    s += '<rect x="16" y="'+(ly-6)+'" width="24" height="12" rx="6" fill="var(--phot)" fill-opacity=".22" stroke="var(--phot)"/><text x="48" y="'+(ly+4)+'" font-size="12" fill="var(--muted)"'+F+'>open to external users</text>';
+    s += '<path d="M232 '+(ly-6)+'l6 6l-6 6l-6 -6z" fill="var(--phot)"/><text x="246" y="'+(ly+4)+'" font-size="12" fill="var(--muted)"'+F+'>announced milestone</text>';
+    s += '<rect x="390" y="'+(ly-6)+'" width="24" height="12" rx="6" fill="none" stroke="var(--muted)" stroke-dasharray="4 3"/><text x="422" y="'+(ly+4)+'" font-size="12" fill="var(--muted)"'+F+'>planned, exact date not announced</text>';
+    s += '</svg>';
+    $('tlSvg').innerHTML = s;
+  })();
+
+  // access via the competence centres
+  const A = D.access;
+  $('accLede').textContent = A.lede;
+  $('ctaGrid').innerHTML = A.ctas.map(c => '<div class="cta"><h3>'+esc(c.t)+'</h3><p>'+esc(c.p)+'</p><a href="'+esc(c.u)+'" target="_blank" rel="noopener">'+esc(c.b)+' on acccess.eu ↗</a></div>').join('');
+  $('webinars').innerHTML = '<h3>'+esc(A.webinars.t)+'</h3><p>'+esc(A.webinars.n)+'. '+lnk(A.webinars.u, 'aCCCess events ↗')+'</p>';
+  const nLinked = D.lines.filter(linked).length;
+  const nQuant = D.lines.filter(l => l.sector === 'quant').length, qLinked = D.lines.filter(l => l.sector === 'quant' && linked(l)).length;
+  $('entryTbl').innerHTML = '<caption class="note" style="caption-side:bottom;text-align:left">'+nLinked+' of '+D.lines.length+' lines name a link with the competence centres'+(qLinked ? '.' : '; none of the '+nQuant+' quantum lines does yet.')+'</caption>' +
+    '<thead><tr><th>Line</th><th>Entry point</th><th>Pricing</th><th>Link to competence centres</th></tr></thead><tbody>' +
+    D.lines.map(l => '<tr><td><b>'+esc(l.name)+'</b></td><td>'+esc(l.entry)+'</td><td>'+esc(l.pricing)+'</td><td>'+esc(l.ccc)+(linked(l) ? '<span class="ccmark">linked</span>' : '')+'</td></tr>').join('') + '</tbody>';
+  $('modelTbl').innerHTML = '<thead><tr><th>Centre</th><th>Model</th><th>What it does</th></tr></thead><tbody>' +
+    D.models.map(m => '<tr><td><b>'+esc(m.cc)+'</b> <span class="tag">'+esc(m.ctry)+'</span></td><td>'+esc(m.model)+'</td><td>'+esc(m.what)+' '+lnk(m.u)+'</td></tr>').join('') + '</tbody>';
+  $('legal').innerHTML = '<h3>Legal basis</h3><ul>' + D.legal.map(x => '<li>'+esc(x)+'</li>').join('') + '</ul>';
+
+  // news
+  let ft = 'all';
+  $('newsSub').textContent = D.news.length + ' items from the pilot lines, newest first. Edition ' + D.meta.edition + '. Dates marked ≈ are derived from the relative age of a post.';
+  function renderNews(){
+    const rows = D.news.filter(n => ft === 'all' || n.ty === ft);
+    $('newsTbl').innerHTML = '<thead><tr><th>Date</th><th>Line</th><th>What happened</th></tr></thead><tbody>' +
+      rows.map(n => '<tr><td class="d">'+esc(fmt(n.d, n.a))+'</td><td><span class="tag">'+esc(n.line)+'</span><br>'+tyTag(n.ty)+'</td><td>'+esc(n.t)+' '+lnk(n.u, 'source ↗')+'</td></tr>').join('') + '</tbody>';
+    [...$('fType').querySelectorAll('button')].forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === ft)));
+  }
+  $('fType').innerHTML = '<span class="lb">Type</span><button type="button" data-v="all">All</button>' + D.newsTypes.map(t => '<button type="button" data-v="'+esc(t.id)+'" title="'+esc(t.desc)+'">'+esc(t.name)+'</button>').join('');
+  $('fType').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; ft = b.dataset.v; renderNews(); });
+  renderNews();
+
+  // events
+  const ev = D.events.filter(e => e.d >= today.slice(0,8) + '01');
+  $('evTbl').innerHTML = '<thead><tr><th>When</th><th>What</th><th>Why it matters</th></tr></thead><tbody>' +
+    ev.map(e => '<tr><td class="d">'+esc(e.when)+'</td><td>'+esc(e.what)+' '+lnk(e.u)+'</td><td>'+esc(e.why)+'</td></tr>').join('') + '</tbody>';
+
+  // feedback
+  const FB = D.feedback;
+  $('fbIntro').textContent = FB.intro;
+  $('fbList').innerHTML = FB.questions.map(q => '<li><b>'+esc(q[0])+'</b>'+esc(q[1])+'</li>').join('');
+  $('fbContact').innerHTML = '<h3>Send feedback</h3><p style="margin:0 0 8px">'+esc(FB.contactNote)+'</p><span class="mail" id="mailAddr">'+esc(FB.email)+'</span><button type="button" class="copy" id="copyMail">Copy address</button>';
+  function selectMail(){ const r = document.createRange(); r.selectNodeContents($('mailAddr')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+  $('copyMail').addEventListener('click', () => {
+    const b = $('copyMail');
+    const done = () => { b.textContent = 'Copied'; setTimeout(() => b.textContent = 'Copy address', 1500); };
+    try { navigator.clipboard.writeText(FB.email).then(done, selectMail); } catch(e) { selectMail(); }
+  });
+
+  // sources
+  $('method').textContent = D.method;
+  $('srcList').innerHTML = D.sources.map(s => '<li>'+lnk(s[1], esc(s[0]))+'</li>').join('');
+})();
+</script>
+
+</body>
+</html>
