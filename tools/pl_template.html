@@ -1,10 +1,3 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Independent weekly view of the 11 EU Chips Act pilot lines: readiness for open access, what each line offers, access timeline and the way in through the Chips Competence Centres. Alpha version.">
-<meta name="robots" content="noindex">
 <title>EU Pilot Lines Monitor</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&family=Geist+Mono:wght@400;600&display=swap">
 <style>
@@ -191,9 +184,6 @@ html.embed .topbar,html.embed .site-foot{display:none}
 html.embed .hero .in{padding-block:6px 30px}
 html.embed .strip{margin-top:14px}
 </style>
-</head>
-<body>
-
 
 <header class="hero">
   <div class="in">
@@ -342,124 +332,7 @@ html.embed .strip{margin-top:14px}
 </footer>
 
 <script type="application/json" id="monitor-data">
-{
-  "meta": {"edition": "W40/2026", "updated": "2026-10-04", "author": "Stanislav Černý", "org": "Czech National Semiconductor Cluster", "lede": "Where the 11 pilot lines of the EU Chips Act stand on the road to open access, what they offer today, and how to reach them through the network of Chips Competence Centres. Updated weekly from the lines' own channels, CORDIS and the Chips JU."},
-  "stats": [
-    {"v": "11", "l": "pilot lines", "s": "5 semiconductor, 6 quantum"},
-    {"v": "4", "l": "take external users today", "s": "open access: FAMES, APECS; early access: NanoIC, PIXEurope"},
-    {"v": "1", "l": "preparing access", "s": "WBG Pilot Line; no public call yet"},
-    {"v": "6", "l": "in ramp-up", "s": "first grants started in 2026; access from 2027 or not yet dated"}
-  ],
-  "sectors": [
-    {"id": "logic", "name": "Logic & memory", "short": "Logic & memory", "color": "var(--logic)"},
-    {"id": "pack", "name": "Packaging & integration", "short": "Packaging", "color": "var(--pack)"},
-    {"id": "phot", "name": "Photonics", "short": "Photonics", "color": "var(--phot)"},
-    {"id": "power", "name": "Power / wide-bandgap", "short": "Power (WBG)", "color": "var(--power)"},
-    {"id": "quant", "name": "Quantum", "short": "Quantum", "color": "var(--quant)"}
-  ],
-  "rings": [
-    {"n": 1, "name": "Open access running", "desc": "Calls or one-stop-shop requests accepted; external projects under way."},
-    {"n": 2, "name": "Early access", "desc": "Design kits, consulting, training or prototyping offered before full capacity."},
-    {"n": 3, "name": "Preparing access", "desc": "Infrastructure and third-party access rules being set up; no public call yet."},
-    {"n": 4, "name": "Ramp-up", "desc": "First specific grant started in 2026; external access announced for 2027 or later, or not dated."}
-  ],
-  "lines": [
-    {"id": "fames", "name": "FAMES", "sector": "logic", "ring": 1, "tech": "FD-SOI 10/7 nm, embedded NVM, RF, 3D, power management", "coord": "CEA-Leti", "budget": "€830M", "consortium": "11 partners · 8 countries", "start": "Dec 2023", "status": "Inaugurated 30 Jan 2026. Annual open access call (2026: 9 Mar–22 May). First named industrial user Quobly announced 29 Sep 2026.", "now": "10 nm FD-SOI pathfinding PDK (Release 1), free under NDA and design-kit licence; spontaneous requests any time.", "next": "AlN/ScAlN RF filters and PCM RF switches Q4 2026; analog/RF PDK Release 2 Q1 2027; next call Mar–May 2027.", "entry": "Open Access Committee (open-access-chair@fames-pilot-line.eu)", "pricing": "Per project; SME, start-up and academic requests get a ranking bonus when oversubscribed", "ccc": "Access guidelines name competence centres as helpers for submitting requests", "web": "https://fames-pilot-line.eu/open-access/", "li": "https://www.linkedin.com/company/fames-pilot-line/", "tl": [{"k": "open", "s": "2026-01-01", "e": "2028-12-31", "l": "PDK 10 nm, annual calls, spontaneous requests"}]},
-    {"id": "nanoic", "name": "NanoIC", "sector": "logic", "ring": 2, "tech": "Beyond-2 nm logic, memory and interconnect", "coord": "imec", "budget": "€2.5B", "consortium": "6 partners · 6 countries", "start": "Jan 2024", "status": "Inaugurated 9 Feb 2026. High-NA EUV (EXE:5200) installed; qualification targeted Q4 2026, described as nearing completion in Sep 2026.", "now": "PDKs via Europractice: N2, A14 logic, eDRAM, fine-pitch RDL, die-to-wafer hybrid bonding. Free for academia and start-ups.", "next": "Hardware prototyping for external users from 2028.", "entry": "Europractice PDK desk (imecpdk@imec.be)", "pricing": "PDKs free for academia and start-ups; hardware pricing not published", "ccc": "Courses developed with competence centres; internships", "web": "https://www.nanoic-project.eu/en/access", "li": "https://www.linkedin.com/company/nanoic-pilot-line/", "tl": [{"k": "open", "s": "2026-01-01", "e": "2028-12-31", "l": "PDKs only (N2, A14, RDL)"}, {"k": "plan", "s": "2028-01-01", "e": "2028-12-31", "l": "prototyping"}]},
-    {"id": "apecs", "name": "APECS", "sector": "pack", "ring": 1, "tech": "Advanced packaging, chiplets, heterogeneous integration", "coord": "Fraunhofer / FMD", "budget": "€730M", "consortium": "10 partners · 8 countries", "start": "Dec 2024", "status": "First quasi-monolithic integration milestone (May 2026). First Open Access Call ran 1 Apr–30 Jun 2026. Interposer platform (silicon, organic, glass) shown at FIRST, Berlin, 30 Sep–1 Oct 2026.", "now": "One-Stop-Shop Office: characterisation, test and reliability; MPW; integration and packaging; photonic and passive components. Entry at any stage from idea to medium-volume manufacturing.", "next": "Roadshow Graz and Klagenfurt 7–8 Oct 2026; next call not yet announced.", "entry": "One-Stop-Shop Office (experts@apecs.eu)", "pricing": "Paid services; price list not published", "ccc": "Roadshows co-hosted with national centres and clusters (ChipNL, AT-C³)", "web": "https://www.apecs.eu/en/open-access.html", "li": "https://www.linkedin.com/company/apecs-pilot-line/", "tl": [{"k": "open", "s": "2026-04-01", "e": "2028-12-31", "l": "One-Stop-Shop, first call Apr–Jun 2026"}]},
-    {"id": "pix", "name": "PIXEurope", "sector": "phot", "ring": 2, "tech": "Photonic ICs: Si, SiN, InP, LNOI, SiC and hybrid integration", "coord": "ICFO", "budget": "≈€400M", "consortium": "20 partners · 11 countries", "start": "Jun 2025", "status": "Public launch 21 May 2026; four of five service lines live. Three new facilities under construction and eight being upgraded.", "now": "Consultancy, training, prototyping and collaborative R&D through a single central gateway.", "next": "Existing partner infrastructure Nov 2026; ≥50% of new equipment accepted by May 2027; full capacity with MPW in 2028 (all equipment by Sep 2028).", "entry": "Single Central Gateway (pixeurope.eu/open-access)", "pricing": "Depends on eligibility, platform, wafer size and partner terms; not published", "ccc": "Training with PIXSpain at ECOC 2026; paired webinar with PIXSpain 29 Oct", "web": "https://pixeurope.eu/open-access/", "li": "https://www.linkedin.com/company/pixeurope/", "tl": [{"k": "open", "s": "2026-05-21", "e": "2028-12-31", "l": ""}, {"k": "mile", "s": "2026-11-01", "l": "partner infra"}, {"k": "mile", "s": "2027-05-01", "l": "50% equipment"}, {"k": "mile", "s": "2028-05-01", "l": "full + MPW"}]},
-    {"id": "wbg", "name": "WBG Pilot Line", "sector": "power", "ring": 3, "tech": "SiC, GaN and ultra-wide-bandgap power and RF devices", "coord": "CNR-IMM Catania", "budget": "€360M", "consortium": "15 RTOs · 7 countries", "start": "Jun 2025", "status": "Launched Sep 2025. New Catania site awaiting permits (Dec 2025). Consortium preparing third-party access on partners' existing tools (Jun 2026).", "now": "Contact and early engagement; access portal online.", "next": "No public call announced.", "entry": "Access portal (wbg-access.fbk.eu)", "pricing": "Not published", "ccc": "No formal link found", "web": "https://www.wbg-pilot-line.eu/", "li": "https://www.linkedin.com/company/wbg-pilot-line/", "tl": [{"k": "none", "l": "access being prepared, no date"}]},
-    {"id": "champion", "name": "CHAMP-ION", "sector": "quant", "ring": 4, "tech": "Ion-trap chips: surface, monolithic, stacked and MEMS traps", "coord": "Silicon Austria Labs", "budget": "€50M", "consortium": "21 partners · 6 countries", "start": "Mar 2026", "status": "Opening event 27 May 2026; website live Sep 2026.", "now": "Early engagement with users.", "next": "Initial access early 2028, then standard service packages (MPW, design support, packaging, validation).", "entry": "Single entry point (champ-ion.eu)", "pricing": "Not published", "ccc": "No formal link found", "web": "https://champ-ion.eu/", "li": "https://www.linkedin.com/company/champ-ion/", "tl": [{"k": "plan", "s": "2028-01-01", "e": "2028-03-31", "l": "early 2028"}]},
-    {"id": "supreme", "name": "SUPREME", "sector": "quant", "ring": 4, "tech": "Superconducting qubits, Josephson junctions on 200 mm, 3D integration", "coord": "VTT", "budget": "€50M", "consortium": "23 partners · 8 countries", "start": "Apr 2026", "status": "Kick-off 13 May 2026; seventh project month in Sep 2026.", "now": "Early engagement with users.", "next": "External user access in 2027: PDKs, shared fabrication runs, service office.", "entry": "supreme-quantum.eu", "pricing": "Licensed services; not published", "ccc": "No formal link found", "web": "https://supreme-quantum.eu/", "li": "https://www.linkedin.com/company/supreme-pilot-line/", "tl": [{"k": "plan", "s": "2027-01-01", "e": "2027-12-31", "l": "2027"}]},
-    {"id": "spins", "name": "SPINS", "sector": "quant", "ring": 4, "tech": "Spin qubits on 300 mm (SOI, Si/SiGe, Ge)", "coord": "imec", "budget": "≈€50M", "consortium": "25 partners", "start": "Apr 2026", "status": "Launched Apr 2026 with start-up lead users.", "now": "Early engagement with users.", "next": "MPW runs and quantum PDKs for start-ups and SMEs; date not announced.", "entry": "imec", "pricing": "Not published", "ccc": "No formal link found", "web": "https://www.imec-int.com/en/press/semiconductor-based-quantum-pilot-line-spins-launched-eu-support", "li": "https://www.linkedin.com/company/spins-pilot-line/", "tl": [{"k": "none", "l": "date not announced"}]},
-    {"id": "p4q", "name": "P4Q", "sector": "quant", "ring": 4, "tech": "Photonics for quantum: SiN, TFLN, AlOx, quantum-dot sources", "coord": "University of Twente", "budget": "€51.5M", "consortium": "29 partners · 12 countries", "start": "Apr 2026", "status": "Kick-off May 2026. Partner AlOx platform already available.", "now": "Early engagement with users.", "next": "PDKs and ADKs; date not announced.", "entry": "photonics4quantum.eu", "pricing": "Not published", "ccc": "No formal link found", "web": "https://www.photonics4quantum.eu/", "li": "https://www.linkedin.com/company/photonics4quantum/", "tl": [{"k": "none", "l": "date not announced"}]},
-    {"id": "qplanet", "name": "Q-PLANET", "sector": "quant", "ring": 4, "tech": "Neutral-atom chips: lasers, atom chips, vapour cells", "coord": "Pasqal", "budget": "€50M", "consortium": "28 partners · 11 countries", "start": "May 2026", "status": "Kick-off 8–9 Jul 2026; grant signed 18 Sep 2026.", "now": "Early engagement with users.", "next": "Open PDKs and ADKs; date not announced.", "entry": "q-planet.eu", "pricing": "Not published", "ccc": "No formal link found", "web": "https://www.q-planet.eu/", "li": "https://www.linkedin.com/company/q-planet-pilot-line/", "tl": [{"k": "none", "l": "date not announced"}]},
-    {"id": "direqt", "name": "DIREQT", "sector": "quant", "ring": 4, "tech": "Diamond quantum technologies", "coord": "CNR", "budget": "€50M", "consortium": "31 partners · 13 countries", "start": "Jul 2026", "status": "Grant signed 4 Sep 2026; no public launch yet.", "now": "Not yet engaging users publicly.", "next": "Open-access framework announced; date not announced.", "entry": "No website yet", "pricing": "Not published", "ccc": "No formal link found", "web": "https://cordis.europa.eu/project/id/101291215", "li": "", "tl": [{"k": "none", "l": "date not announced"}]}
-  ],
-  "newsTypes": [
-    {"id": "roadmap", "name": "Roadmap", "desc": "Published plans, infrastructure schedules, access dates"},
-    {"id": "service", "name": "New service", "desc": "New PDK, platform, service line or access route"},
-    {"id": "event", "name": "Event", "desc": "Conferences, roadshows, trainings, webinars"},
-    {"id": "milestone", "name": "Milestone", "desc": "Inaugurations, first users, tools installed, launches"}
-  ],
-  "news": [
-    {"d": "2026-10-01", "a": false, "line": "NanoIC", "t": "Article on early-access PDKs: pathfinding PDKs for logic beyond 2 nm and system-exploration PDKs for memory and interconnect, with access steps.", "u": "https://www.linkedin.com/company/nanoic-pilot-line/posts/", "ty": "service", "c": ["pl"]},
-    {"d": "2026-09-30", "a": false, "line": "APECS", "t": "FIRST by FMD, Berlin: interposer platform with silicon, organic and glass substrates; companies can enter at any stage up to medium-volume manufacturing.", "u": "https://www.linkedin.com/company/apecs-pilot-line/posts/", "ty": "service", "c": ["pl"]},
-    {"d": "2026-09-29", "a": false, "line": "FAMES", "t": "Quobly gains access to FAMES through CEA-Leti for next-generation silicon quantum processors: first named industrial user.", "u": "https://www.linkedin.com/company/fames-pilot-line/posts/", "ty": "milestone", "c": ["pl"]},
-    {"d": "2026-09-28", "a": false, "line": "FAMES + NanoIC", "t": "Joint booths and open-access presentations at IWJT 2026, Grenoble.", "u": "https://www.linkedin.com/company/fames-pilot-line/posts/", "ty": "event", "c": ["pl"]},
-    {"d": "2026-09-27", "a": true, "line": "PIXEurope", "t": "Infrastructure plan published: 3 new facilities, 8 upgrades; ≥50% of equipment accepted by May 2027, 100% by Sep 2028. TNO's 6-inch InP line in Eindhoven tops out.", "u": "https://www.linkedin.com/company/pixeurope/posts/", "ty": "roadmap", "c": ["pl"]},
-    {"d": "2026-09-27", "a": true, "line": "FAMES", "t": "Brochure for the 10 nm FD-SOI pathfinding PDK released.", "u": "https://www.linkedin.com/company/fames-pilot-line/posts/", "ty": "service", "c": ["pl"]},
-    {"d": "2026-09-27", "a": true, "line": "Q-PLANET", "t": "Coordinator video on goals: €49M, 28 partners, three years; Centrale Lille/IEMN to host a second vapour-cell production centre.", "u": "https://www.linkedin.com/company/q-planet-pilot-line/posts/", "ty": "milestone", "c": ["pl"]},
-    {"d": "2026-09-23", "a": false, "line": "PIXEurope", "t": "Training with the Spanish competence centre PIXSpain alongside ECOC, Málaga, on access to pilot prototyping.", "u": "https://www.linkedin.com/company/pixeurope/posts/", "ty": "event", "c": ["pl", "ccc"]},
-    {"d": "2026-09-23", "a": false, "c": ["ccc", "pl"], "ty": "event", "line": "SCCC", "t": "Swedish centre's webinar on the WBG pilot line; 2D pilot line webinar follows on 13 Oct.", "u": "https://sccc.se/"},
-    {"d": "2026-09-21", "a": false, "line": "FAMES", "t": "First FAMES Academy short course in Grenoble: 13 speakers, including open-access mechanisms.", "u": "https://www.linkedin.com/company/fames-pilot-line/posts/", "ty": "event", "c": ["pl"]},
-    {"d": "2026-09-20", "a": true, "line": "NanoIC", "t": "High-NA EUV tool described as nearing completion.", "u": "https://www.linkedin.com/company/nanoic-pilot-line/posts/", "ty": "milestone", "c": ["pl"]},
-    {"d": "2026-09-16", "a": false, "line": "All five + EuroCDP", "t": "Flanders Semiconductor Forum, organised by the competence centre FC3: all five lines and the design platform present services and access in one day.", "u": "https://www.linkedin.com/company/pixeurope/posts/", "ty": "event", "c": ["pl", "ccc", "cdp"]},
-    {"d": "2026-09-14", "a": false, "line": "WBG", "t": "E-MRS Fall Meeting, Warsaw: dedicated session and booth; no access news.", "u": "https://www.linkedin.com/company/wbg-pilot-line/posts/", "ty": "event", "c": ["pl"]},
-    {"d": "2026-09-13", "a": true, "line": "CHAMP-ION", "t": "Website champ-ion.eu goes live.", "u": "https://www.linkedin.com/company/champ-ion/posts/", "ty": "milestone", "c": ["pl"]},
-    {"d": "2026-09-10", "a": false, "line": "All five + Chips JU", "t": "IEEE ESTC, Helsinki: special session on the status of the first five lines and plans for the next 12 months.", "u": "https://www.linkedin.com/company/pixeurope/posts/", "ty": "roadmap", "c": ["pl"]},
-    {"d": "2026-09-07", "a": false, "line": "FAMES + NanoIC", "t": "ESSERC, Palma: strong academic interest in open access and PDKs.", "u": "https://www.linkedin.com/company/fames-pilot-line/posts/", "ty": "event", "c": ["pl"]},
-    {"d": "2026-06-09", "a": false, "line": "WBG + IPCEI AST", "t": "VDI/VDE panel 'IPCEI AST meets the Chips JU Pilot Lines' on cooperation between lines and IPCEI AST companies.", "u": "https://www.linkedin.com/company/wbg-pilot-line/posts/", "ty": "event", "c": ["pl"]}
-  ],
-  "events": [
-    {"d": "2026-10-05", "when": "5 Oct 2026, 15:30–17:30 CEST", "what": "Chips JU consultation for Work Programme 2027: EU material and equipment qualification on pilot lines (online)", "why": "Shapes future pilot-line call topics", "u": "https://www.linkedin.com/company/chips-ju/posts/", "c": ["pl"]},
-    {"d": "2026-10-07", "when": "7–8 Oct 2026", "what": "APECS roadshow, Graz and Klagenfurt, with Silicon Alps and AT-C³", "why": "Meet the APECS one-stop-shop", "u": "https://www.apecs.eu/en/access/roadshows.html", "c": ["pl"]},
-    {"d": "2026-10-12", "when": "12 Oct 2026, 13:00–16:00 CET", "what": "Webinar 'Your Gateway to European Semiconductor Technologies' (CSC, SK Chips, CC Chip.si with PIXEurope, NanoIC, EuroCDP)", "why": "Three competence centres with two lines and the design platform", "u": "https://www.acccess.eu/events/your-gateway-to-european-semiconductor-technologies-cccs-pilot-lines-eurocdp", "c": ["ccc", "pl", "cdp"]},
-    {"d": "2026-10-13", "c": ["ccc", "pl"], "when": "13 Oct 2026", "what": "SCCC webinar on the 2D pilot line", "why": "Centre presents a pilot line", "u": "https://sccc.se/"},
-    {"d": "2026-10-29", "when": "29 Oct 2026", "what": "aCCCess Technology Offers #4: PIXEurope with PIXSpain", "why": "Line paired with a competence centre", "u": "https://www.acccess.eu/events/acccess-webinar-on-technology-offers-4", "c": ["acc", "ccc", "pl"]},
-    {"d": "2026-11-01", "when": "Nov 2026", "what": "PIXEurope opens existing partner infrastructure", "why": "First hardware access for photonics", "u": "https://pixeurope.eu/open-access/", "c": ["pl"]},
-    {"d": "2026-11-10", "when": "10–13 Nov 2026", "what": "SEMICON Europa, Munich: Chips JU booth C2311 with all five lines, aCCCess and EuroCDP", "why": "Every line in one place", "u": "https://www.linkedin.com/company/chips-ju/posts/", "c": ["pl", "cdp", "ccc", "acc"]},
-    {"d": "2026-11-17", "when": "17 Nov 2026", "what": "Deadline EuroHPC QEXP-14 (€15M), bridge to the quantum pilot lines", "why": "Quantum funding", "u": "https://www.eurohpc-ju.europa.eu/quantum-experimental-pilot-lines-quantum-technologies_en", "c": ["pl"]},
-    {"d": "2026-11-25", "when": "25–27 Nov 2026", "what": "NanoIC Student Excellence Day and Winter School on Embedded Memories, imec Leuven (free for students)", "why": "Skills", "u": "https://www.linkedin.com/company/nanoic-pilot-line/posts/", "c": ["pl"]},
-    {"d": "2026-12-01", "when": "1 Dec 2026 – 31 Mar 2027 (to be confirmed)", "what": "Chips JU calls Quantum Chips Design and Quantum Enabling Technologies", "why": "Require access arrangements with a pilot line", "u": "https://qt.eu/funding-opportunities/", "c": ["pl"]},
-    {"d": "2026-12-02", "when": "2–3 Dec 2026", "what": "EFECS 2026, Helsinki (Chips JU)", "why": "Meet lines and Chips JU", "u": "https://efecs.eu/", "c": ["pl", "cdp", "ccc"]},
-    {"d": "2027-01-25", "when": "25–29 Jan 2027", "what": "European FD-SOI Design School, Grenoble (FAMES)", "why": "Skills", "u": "https://www.linkedin.com/company/fames-pilot-line/posts/", "c": ["pl"]},
-    {"d": "2027-03-01", "when": "Mar–May 2027", "what": "FAMES annual open access call", "why": "Main window for new FAMES projects", "u": "https://fames-pilot-line.eu/open-access/", "c": ["pl"]}
-  ],
-  "next": [
-    {"d": "2026-11", "when": "Nov 2026", "c": "pl", "t": "PIXEurope opens existing partner infrastructure"},
-    {"d": "2026-12", "when": "Q4 2026", "c": "pl", "t": "NanoIC High-NA EUV qualification; FAMES RF filter and PCM switch PDKs"},
-    {"d": "2027-03", "when": "Mar–May 2027", "c": "pl", "t": "FAMES annual open access call"},
-    {"d": "2027-05", "when": "May 2027", "c": "pl", "t": "PIXEurope: ≥50% of new equipment accepted"},
-    {"d": "2027-06", "when": "2027", "c": "pl", "t": "SUPREME opens to external users"},
-    {"d": "2028-02", "when": "Early 2028", "c": "pl", "t": "CHAMP-ION initial access; NanoIC hardware prototyping from 2028"},
-    {"d": "2028-09", "when": "Sep 2028", "c": "pl", "t": "PIXEurope fully equipped, MPW available"}
-  ],
-  "access": {"lede": "Every EU Member State and Norway has a Chips Competence Centre. Under the Chips Act the centres help companies, start-ups and researchers reach the pilot lines, and the aCCCess network action connects all 30 of them.", "ctas": [{"t": "Find your national centre", "p": "30 centres in 28 countries, each with a contact for pilot-line access.", "b": "Network", "u": "https://www.acccess.eu/network"}, {"t": "Ask the Technology Advisor", "p": "Describe what you need; the advisor routes the request to the centres that work on that technology.", "b": "Technologies", "u": "https://www.acccess.eu/technologies"}, {"t": "Check open calls", "p": "Active calls from pilot lines, the design platform, the centres and the Chips JU in one list.", "b": "Open calls", "u": "https://www.acccess.eu/open-calls"}], "webinars": {"t": "Technology Offers webinars", "n": "Each session pairs a pilot line with a centre: APECS with ChipNL (May), FAMES with ASTEERICS and EuroCDP (Jul), PIXEurope with PIXSpain (29 Oct)", "u": "https://www.acccess.eu/events"}},
-  "models": [
-    {"cc": "SCCC + Vinnova", "ctry": "SE", "model": "Funds access fees", "what": "SMEs get up to SEK 3.5M per project for pilot-line access fees, conditional on an access certificate from the line (Feb 2026 – Jul 2027).", "u": "https://www.vinnova.se/en/calls-for-proposals/chips-ju/chips-ju-testing-and-validation-of-new-2025-04692/"},
-    {"cc": "FC3", "ctry": "BE", "model": "All-lines forum", "what": "Flanders Semiconductor Forum, 16 Sep 2026: all five lines and EuroCDP present services and access in one free day.", "u": "https://fc3.be/fsf2026/"},
-    {"cc": "PIXSpain", "ctry": "ES", "model": "Joint training", "what": "Training with PIXEurope alongside ECOC 2026; paired aCCCess webinar 29 Oct.", "u": "https://www.linkedin.com/company/pixeurope/posts/"},
-    {"cc": "ChipNL", "ctry": "NL", "model": "Guided applications", "what": "Guides companies through pilot-line and design-platform applications; Dutch contact point for APECS.", "u": "https://cccnl.nl/en/pilot-lines"},
-    {"cc": "G3C", "ctry": "DE", "model": "Free navigation", "what": "Run by FMD, which also operates the APECS one-stop-shop; free first consultation and facilitated access.", "u": "https://www.german-chips.de/en/about-us.html"},
-    {"cc": "AT-C³", "ctry": "AT", "model": "Co-hosted roadshow", "what": "Co-hosts the APECS roadshow in Graz and Klagenfurt; services free or reduced for SMEs, published price lists.", "u": "https://www.apecs.eu/en/access/roadshows.html"},
-    {"cc": "ASTEERICS", "ctry": "FR", "model": "Training + priority access", "what": "Free training offer; joint aCCCess webinar with FAMES, Jul 2026.", "u": "https://www.acccess.eu/news"}
-  ],
-  "legal": [
-    "Regulation (EU) 2023/1781, recital 29: competence centres facilitate access to pilot lines and the design platform and act as an access point to the network.",
-    "Recital 18: access on a transparent, non-discriminatory basis; large companies pay market or cost-plus prices; SMEs and academia get preferential access or reduced prices.",
-    "Chips JU Work Programme (decision GB 2023.51): pilot lines must facilitate collaboration with competence centres; PDKs must be available through the European design platform.",
-    "Chips Act 2.0 proposal COM(2026) 504: pilot lines continue; at least one competence centre per Member State provides access to design and pilot-line facilities."
-  ],
-  "feedback": {"banner": "Alpha version, open for feedback until 1 November 2026. Corrections are applied every week.", "intro": "This page is an independent view of the EU Chips Act pilot lines, built to sit alongside the aCCCess network of competence centres. It reports what the lines publish. Tell us what is wrong, what is missing and what would make it useful.", "questions": [["Accuracy", "Is your pilot line described correctly? What is missing or out of date?"], ["Readiness scale", "Do the four levels (open access running, early access, preparing access, ramp-up) describe readiness well? Which criteria should define each level?"], ["Indicators", "Which two or three indicators would help you most? For example external users, access requests and lead times, published price conditions, PDKs on the design platform, referrals from competence centres."], ["Competence centres", "Which centre helped you reach a pilot line? Which link between a line and a centre is missing here?"], ["Data contribution", "Would your pilot line send a short monthly status line?"], ["Home", "Should this page stay independent, or be hosted or endorsed by the aCCCess network or the Chips JU?"]], "contactNote": "Short answers are enough; a correction can be one line. Please mention which pilot line or centre you refer to.", "email": "cerny@semicz.eu"},
-  "sources": [
-    ["CORDIS project pages (FAMES, NanoIC, APECS, WBG, PIXEurope, CHAMP-ION, SUPREME, P4Q, Q-PLANET, DIREQT)", "https://cordis.europa.eu/"],
-    ["European Commission: FAMES inauguration, 30 Jan 2026", "https://digital-strategy.ec.europa.eu/en/news/fames-pilot-line-inaugurated-advance-ultra-low-power-semiconductors-europe"],
-    ["NanoIC access and PDKs", "https://www.nanoic-project.eu/en/access"],
-    ["Chips JU: APECS Open Access Call", "https://www.chips-ju.europa.eu/NewsDetails/?id=a262f8c6-c738-f111-88b5-000d3a27d474"],
-    ["imec: PIXEurope launch, 4 Jun 2026", "https://www.imec-int.com/en/press/europes-bid-leadership-photonic-chips-begins-barcelona"],
-    ["Fraunhofer IISB: WBG consortium meeting, Jun 2026", "https://www.iisb.fraunhofer.de/de/press_media/pressemitteilungen/pressearchiv/archiv_2026/wbg-treffen-06-2026.html"],
-    ["champ-ion.eu", "https://champ-ion.eu/"],
-    ["Chips JU Work Programme appendix (pilot-line access conditions)", "https://www.chips-ju.europa.eu/Appendix2_2023I_Initiatives.pdf"],
-    ["aCCCess news and events", "https://www.acccess.eu/news"],
-    ["Pilot-line LinkedIn company pages (see each card)", "https://www.linkedin.com/company/chips-ju/"],
-    ["aCCCess network of competence centres", "https://www.acccess.eu/network"],
-    ["Chips JU Annual Activity Report: competence centres", "https://aar2024.chips-ju.europa.eu/annual-report/competence-centres"],
-    ["aCCCess open calls", "https://www.acccess.eu/open-calls"],
-    ["aCCCess events", "https://www.acccess.eu/events"]
-  ],
-  "method": "Compiled from the pilot lines' websites and LinkedIn company pages, CORDIS, the Chips JU, aCCCess and the competence centres' channels, and partner press releases. Each weekly edition adds new items and changes only the facts they affect. Dates marked ≈ are derived from the relative age of a post."
-}
+/*__DATA__*/
 </script>
 
 <script>
@@ -654,6 +527,3 @@ html.embed .strip{margin-top:14px}
   $('srcList').innerHTML = D.sources.map(s => '<li>'+lnk(s[1], esc(s[0]))+'</li>').join('');
 })();
 </script>
-
-</body>
-</html>
