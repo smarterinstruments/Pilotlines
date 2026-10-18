@@ -33,11 +33,13 @@ def strip_q(t):
     keep = [x for x in t.split('; ') if not mentions_q(x)]
     return '; '.join(keep)
 
+named = [l['name'] for l in lines if re.search(r'named industrial user', l.get('status', ''), re.I)]
 stats = [
     {"v": str(len(lines)), "l": "semiconductor pilot lines", "s": "first Chips for Europe call: " + ", ".join(l['name'] for l in lines)},
     {"v": str(len(ring(1)) + len(ring(2))), "l": "take external users today",
      "s": "open access: " + ", ".join(ring(1)) + "; early access: " + ", ".join(ring(2))},
-    {"v": str(len(ring(3))), "l": "preparing access", "s": ", ".join(ring(3)) + "; no public call yet"},
+    ({"v": str(len(ring(3))), "l": "preparing access", "s": ", ".join(ring(3)) + "; no public call yet"} if ring(3) else
+     {"v": str(len(named)), "l": "name an industrial user", "s": ", ".join(named) + "; see the line cards for the companies"}),
     {"v": str(sum(1 for l in lines if linked(l))), "l": "name a link with competence centres", "s": "access guidelines, joint roadshows, trainings or webinars with a national centre"},
 ]
 

@@ -91,7 +91,8 @@ h3.sh{font-size:20px;font-weight:600;color:var(--navy);margin:36px 0 10px;text-w
 @media (max-width:860px){.grid2,.grid3{grid-template-columns:1fr}}
 
 /* stats */
-.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:0 0 28px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:0 0 10px}
+.fine{font-size:12.5px;color:var(--muted);margin:0 0 28px;max-width:80ch}
 @media (max-width:980px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:440px){.stats{grid-template-columns:1fr}}
 .stat{background:var(--panel);border:2px solid var(--rule);border-radius:16px;padding:16px 20px;min-width:0}
@@ -229,6 +230,7 @@ html.embed .strip{margin-top:14px}
     <h2 id="ovHead"></h2>
     <p class="sub" id="ovSub"></p>
     <div class="stats" id="stats"></div>
+    <p class="fine" id="quantNote"></p>
     <div class="grid2">
       <div class="callout watch" id="watch" style="margin:0"></div>
       <div>
@@ -255,6 +257,7 @@ html.embed .strip{margin-top:14px}
     <p class="eyebrow" id="linesEyebrow">The lines</p>
     <h2>What each line offers today and what comes next</h2>
     <p class="sub">Budgets are total public and private funding. "Via competence centres" shows the link each line has with the national centres.</p>
+    <p class="fine" id="quantNote2" style="margin-top:-8px"></p>
     <div class="filters" id="fSec" role="group" aria-label="Filter lines by technology"></div>
     <div class="cards" id="cards"></div>
   </div></section>
@@ -369,8 +372,10 @@ html.embed .strip{margin-top:14px}
   const NUM = ['no','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen'];
   const word = n => NUM[n] || String(n), cap = t => t.charAt(0).toUpperCase() + t.slice(1);
   const nAll = D.lines.length, nQ = D.lines.filter(l => l.sector === 'quant').length, nOpen = D.lines.filter(l => l.ring <= 2).length;
-  $('ovHead').textContent = cap(word(nAll)) + ' lines, ' + word(nOpen) + ' already taking external users';
-  $('ovSub').textContent = cap(word(nAll - nQ)) + ' semiconductor pilot lines from the first Chips for Europe call' + (nQ ? ' and ' + word(nQ) + ' quantum lines that started in 2026' : '') + '. Access has to be transparent and non-discriminatory, with preferential terms for SMEs, start-ups and academia.' + (nQ ? '' : ' The six quantum pilot lines selected in 2025 are not covered on this page.');
+  $('ovHead').textContent = cap(word(nAll)) + ' lines, ' + (nOpen === nAll ? 'all of them' : word(nOpen)) + ' already taking external users';
+  $('ovSub').textContent = cap(word(nAll - nQ)) + ' semiconductor pilot lines from the first Chips for Europe call' + (nQ ? ' and ' + word(nQ) + ' quantum lines that started in 2026' : '') + '. Access has to be transparent and non-discriminatory, with preferential terms for SMEs, start-ups and academia.';
+  const qNote = nQ ? '' : 'Note: the six quantum pilot lines of the EU Chips Act (CHAMP-ION, SUPREME, SPINS, P4Q, Q-PLANET, DIREQT) are not included in this aCCCess edition; they are followed on the EU Chips Act Pillar I Monitor.';
+  $('quantNote').textContent = qNote; $('quantNote2').textContent = qNote;
   $('linesEyebrow').textContent = 'The ' + word(nAll) + ' lines';
   $('stats').innerHTML = D.stats.map(s => '<div class="stat"><div class="v">'+esc(s.v)+'</div><div class="l">'+esc(s.l)+'</div><div class="s">'+esc(s.s)+'</div></div>').join('');
   const TY = Object.fromEntries(D.newsTypes.map(t => [t.id, t]));
