@@ -213,7 +213,7 @@ html.embed .strip{margin-top:14px}
   <nav aria-label="Sections" id="rail">
     <a href="#overview">Overview</a>
     <a href="#radar">Radar</a>
-    <a href="#lines">The 11 lines</a>
+    <a href="#lines">The lines</a>
     <a href="#timeline">Timeline</a>
     <a href="#access">Access via centres</a>
     <a href="#news">News</a>
@@ -241,7 +241,7 @@ html.embed .strip{margin-top:14px}
   <section class="band" id="radar"><div class="in">
     <p class="eyebrow">Readiness radar</p>
     <h2>Where each line stands on the road to open access</h2>
-    <p class="sub">The centre is full open access with external users; the outer ring is lines in their first funding phase. Click a dot to open the line's card.</p>
+    <p class="sub">The centre is full open access with external users; the further out a line sits, the earlier its stage. Click a dot to open the line's card.</p>
     <div class="grid2">
       <div class="radar" id="radarSvg"></div>
       <div>
@@ -252,9 +252,9 @@ html.embed .strip{margin-top:14px}
   </div></section>
 
   <section class="band" id="lines"><div class="in">
-    <p class="eyebrow">The 11 lines</p>
+    <p class="eyebrow" id="linesEyebrow">The lines</p>
     <h2>What each line offers today and what comes next</h2>
-    <p class="sub">Budgets are total public and private funding; quantum figures cover the first specific grant. "Via competence centres" shows the link each line has with the national centres.</p>
+    <p class="sub">Budgets are total public and private funding. "Via competence centres" shows the link each line has with the national centres.</p>
     <div class="filters" id="fSec" role="group" aria-label="Filter lines by technology"></div>
     <div class="cards" id="cards"></div>
   </div></section>
@@ -370,7 +370,8 @@ html.embed .strip{margin-top:14px}
   const word = n => NUM[n] || String(n), cap = t => t.charAt(0).toUpperCase() + t.slice(1);
   const nAll = D.lines.length, nQ = D.lines.filter(l => l.sector === 'quant').length, nOpen = D.lines.filter(l => l.ring <= 2).length;
   $('ovHead').textContent = cap(word(nAll)) + ' lines, ' + word(nOpen) + ' already taking external users';
-  $('ovSub').textContent = cap(word(nAll - nQ)) + ' semiconductor pilot lines from the first Chips for Europe call and ' + word(nQ) + ' quantum lines that started in 2026. Access has to be transparent and non-discriminatory, with preferential terms for SMEs, start-ups and academia.';
+  $('ovSub').textContent = cap(word(nAll - nQ)) + ' semiconductor pilot lines from the first Chips for Europe call' + (nQ ? ' and ' + word(nQ) + ' quantum lines that started in 2026' : '') + '. Access has to be transparent and non-discriminatory, with preferential terms for SMEs, start-ups and academia.' + (nQ ? '' : ' The six quantum pilot lines selected in 2025 are not covered on this page.');
+  $('linesEyebrow').textContent = 'The ' + word(nAll) + ' lines';
   $('stats').innerHTML = D.stats.map(s => '<div class="stat"><div class="v">'+esc(s.v)+'</div><div class="l">'+esc(s.l)+'</div><div class="s">'+esc(s.s)+'</div></div>').join('');
   const TY = Object.fromEntries(D.newsTypes.map(t => [t.id, t]));
   const tyTag = id => '<span class="ty ty-'+esc(id)+'">'+esc((TY[id] || {}).name || id)+'</span>';
@@ -405,23 +406,23 @@ html.embed .strip{margin-top:14px}
 
   // radar
   (function(){
-    const W = 780, C = W/2, R = [0, 78, 150, 214, 278];
+    const W = 780, C = W/2, NR = D.rings.length, R = ({3: [0, 104, 196, 278], 4: [0, 78, 150, 214, 278]})[NR] || Array.from({length: NR + 1}, (_, i) => Math.round(278 * i / NR));
     const weights = {logic:1.1, pack:0.8, phot:0.8, power:0.8, quant:2.5};
     const total = D.sectors.reduce((a,s) => a + weights[s.id], 0);
     let ang = -Math.PI/2 - (weights.logic/total)*Math.PI;
     const span = {};
     D.sectors.forEach(s => { const w = weights[s.id]/total*2*Math.PI; span[s.id] = [ang, ang + w]; ang += w; });
     let svg = '<svg viewBox="0 0 ' + W + ' ' + W + '" role="img" aria-label="Readiness radar of the EU pilot lines">';
-    for (let i = 4; i >= 1; i--) svg += '<circle cx="'+C+'" cy="'+C+'" r="'+R[i]+'" fill="'+(i%2? 'var(--panel2)':'var(--panel)')+'" stroke="var(--rule)" stroke-width="1.5"/>';
+    for (let i = NR; i >= 1; i--) svg += '<circle cx="'+C+'" cy="'+C+'" r="'+R[i]+'" fill="'+(i%2? 'var(--panel2)':'var(--panel)')+'" stroke="var(--rule)" stroke-width="1.5"/>';
     D.sectors.forEach(s => {
       const a = span[s.id][0];
-      svg += '<line x1="'+C+'" y1="'+C+'" x2="'+(C+R[4]*Math.cos(a)).toFixed(1)+'" y2="'+(C+R[4]*Math.sin(a)).toFixed(1)+'" stroke="var(--rule)" stroke-width="1.5"/>';
-      const mid = (span[s.id][0]+span[s.id][1])/2, lr = R[4]+16;
+      svg += '<line x1="'+C+'" y1="'+C+'" x2="'+(C+R[NR]*Math.cos(a)).toFixed(1)+'" y2="'+(C+R[NR]*Math.sin(a)).toFixed(1)+'" stroke="var(--rule)" stroke-width="1.5"/>';
+      const mid = (span[s.id][0]+span[s.id][1])/2, lr = R[NR]+16;
       const lx = C + lr*Math.cos(mid), ly = C + lr*Math.sin(mid);
       const anchor = Math.abs(Math.cos(mid)) < .3 ? 'middle' : (Math.cos(mid) > 0 ? 'start' : 'end');
       svg += '<text x="'+lx.toFixed(1)+'" y="'+(ly+4).toFixed(1)+'" text-anchor="'+anchor+'" font-size="15" font-weight="700" fill="'+s.color+'" font-family="Raleway,system-ui,sans-serif">'+esc(s.short || s.name)+'</text>';
     });
-    for (let i = 1; i <= 4; i++) svg += '<text x="'+(C+4)+'" y="'+(C-R[i]+14)+'" font-size="11" fill="var(--faint)" font-family="ui-monospace,monospace">'+i+'</text>';
+    for (let i = 1; i <= NR; i++) svg += '<text x="'+(C+4)+'" y="'+(C-R[i]+14)+'" font-size="11" fill="var(--faint)" font-family="ui-monospace,monospace">'+i+'</text>';
     const groups = {};
     D.lines.forEach(l => { const k = l.sector + '|' + l.ring; (groups[k] = groups[k] || []).push(l); });
     Object.entries(groups).forEach(([k, arr]) => {
@@ -429,7 +430,7 @@ html.embed .strip{margin-top:14px}
       arr.forEach((l, i) => {
         const a = a0 + (a1 - a0) * (i + 1) / (arr.length + 1);
         const x = C + r*Math.cos(a), y = C + r*Math.sin(a);
-        const right = Math.cos(a) >= 0;
+        const outward = Math.cos(a) >= 0, right = (ring == NR) ? !outward : outward; // outer-ring labels point inwards, clear of the sector labels
         svg += '<a href="#line-'+l.id+'" data-line="'+l.id+'" class="rlink"><circle class="dot" cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="7" fill="'+sec[sid].color+'" stroke="var(--panel)" stroke-width="2"><title>'+esc(l.name+' · '+ringName(l.ring))+'</title></circle>' +
                '<text x="'+(x + (right? 11 : -11)).toFixed(1)+'" y="'+(y+4).toFixed(1)+'" text-anchor="'+(right?'start':'end')+'" font-size="15" font-weight="600" fill="var(--fg)" font-family="Raleway,system-ui,sans-serif">'+esc(l.name)+'</text></a>';
       });
@@ -485,7 +486,7 @@ html.embed .strip{margin-top:14px}
   $('webinars').innerHTML = '<h3>'+esc(A.webinars.t)+'</h3><p>'+esc(A.webinars.n)+'. '+lnk(A.webinars.u, 'aCCCess events ↗')+'</p>';
   const nLinked = D.lines.filter(linked).length;
   const nQuant = D.lines.filter(l => l.sector === 'quant').length, qLinked = D.lines.filter(l => l.sector === 'quant' && linked(l)).length;
-  $('entryTbl').innerHTML = '<caption class="note" style="caption-side:bottom;text-align:left">'+nLinked+' of '+D.lines.length+' lines name a link with the competence centres'+(qLinked ? '.' : '; none of the '+nQuant+' quantum lines does yet.')+'</caption>' +
+  $('entryTbl').innerHTML = '<caption class="note" style="caption-side:bottom;text-align:left">'+nLinked+' of '+D.lines.length+' lines name a link with the competence centres'+(qLinked || !nQuant ? '.' : '; none of the '+nQuant+' quantum lines does yet.')+'</caption>' +
     '<thead><tr><th>Line</th><th>Entry point</th><th>Pricing</th><th>Link to competence centres</th></tr></thead><tbody>' +
     D.lines.map(l => '<tr><td><b>'+esc(l.name)+'</b></td><td>'+esc(l.entry)+'</td><td>'+esc(l.pricing)+'</td><td>'+esc(l.ccc)+(linked(l) ? '<span class="ccmark">linked</span>' : '')+'</td></tr>').join('') + '</tbody>';
   $('modelTbl').innerHTML = '<thead><tr><th>Centre</th><th>Model</th><th>What it does</th></tr></thead><tbody>' +

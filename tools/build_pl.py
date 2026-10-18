@@ -3,8 +3,9 @@
 Usage: python3 tools/build_pl.py <pillar1-monitor.html | data.json> [eu-pilot-lines-monitor.html]
 
 Reads the shared monitor data (the <script type="application/json" id="monitor-data"> block of the
-Pillar I Monitor page, or a data.json), keeps only what concerns the pilot lines, adds the
-competence-centre access layer (aCCCess) and fills tools/pl_template.html. The result is the
+Pillar I Monitor page, or a data.json), keeps only what concerns the five semiconductor pilot lines (the quantum
+lines are left out of this edition), adds the competence-centre access layer (aCCCess) and fills
+tools/pl_template.html. The result is the
 editorial page; tools/publish.py wraps it for GitHub Pages.
 """
 import json, sys, os, re
@@ -17,16 +18,27 @@ raw = open(SRC, encoding='utf-8').read()
 m = re.search(r'<script type="application/json" id="monitor-data">\n?(.*?)\n?</script>', raw, re.S)
 d = json.loads((m.group(1) if m else raw).replace('<\\/', '</'))
 
-lines = d['lines']
+# The aCCCess edition covers the semiconductor pilot lines only (request of the aCCCess
+# coordinator, Oct 2026); the quantum lines stay on the full Pillar I Monitor.
+quant = [l for l in d['lines'] if l['sector'] == 'quant']
+qnames = [l['name'] for l in quant]
+lines = [l for l in d['lines'] if l['sector'] != 'quant']
 ring = lambda n: [l['name'] for l in lines if l['ring'] == n]
-quant = [l for l in lines if l['sector'] == 'quant']
+rings_used = {l['ring'] for l in lines}
+mentions_q = lambda t: any(q in (t or '') for q in qnames)
+linked = lambda l: not re.match(r'^no formal link', l.get('ccc') or '', re.I)
+
+def strip_q(t):
+    """Drop the parts of a '; '-separated sentence that concern a quantum line."""
+    keep = [x for x in t.split('; ') if not mentions_q(x)]
+    return '; '.join(keep)
 
 stats = [
-    {"v": str(len(lines)), "l": "pilot lines", "s": f"{len(lines) - len(quant)} semiconductor, {len(quant)} quantum"},
+    {"v": str(len(lines)), "l": "semiconductor pilot lines", "s": "first Chips for Europe call: " + ", ".join(l['name'] for l in lines)},
     {"v": str(len(ring(1)) + len(ring(2))), "l": "take external users today",
      "s": "open access: " + ", ".join(ring(1)) + "; early access: " + ", ".join(ring(2))},
     {"v": str(len(ring(3))), "l": "preparing access", "s": ", ".join(ring(3)) + "; no public call yet"},
-    {"v": str(len(ring(4))), "l": "in ramp-up", "s": "first grants started in 2026; access from 2027 or not yet dated"},
+    {"v": str(sum(1 for l in lines if linked(l))), "l": "name a link with competence centres", "s": "access guidelines, joint roadshows, trainings or webinars with a national centre"},
 ]
 
 webinars = next(r for r in d['acc']['results'] if r['r'] == 'Technology Offers webinars')
@@ -36,19 +48,24 @@ seen, sources = set(), []
 for name, url in d['sources']:
     if any(k.lower() in name.lower() for k in skip) or not url or url in seen:
         continue
+    for q in qnames:  # drop quantum lines from source names; skip sources that are only about them
+        name = re.sub(r',?\s*' + re.escape(q) + r'(?=[,)])', '', name)
+    if mentions_q(name):
+        continue
     seen.add(url); sources.append([name, url])
 
 out = {
     "meta": {**d['meta'],
-             "lede": "Where the 11 pilot lines of the EU Chips Act stand on the road to open access, what they offer today, and how to reach them through the network of Chips Competence Centres. Updated weekly from the lines' own channels, CORDIS and the Chips JU."},
+             "lede": "Where the five semiconductor pilot lines of the EU Chips Act stand on the road to open access, what they offer today, and how to reach them through the network of Chips Competence Centres. Updated weekly from the lines' own channels, CORDIS and the Chips JU."},
     "stats": stats,
-    "sectors": d['sectors'],
-    "rings": d['rings'],
+    "sectors": [s for s in d['sectors'] if s['id'] != 'quant'],
+    "rings": [r for r in d['rings'] if r['n'] in rings_used],
     "lines": lines,
     "newsTypes": d['newsTypes'],
-    "news": sorted([n for n in d['news'] if 'pl' in n['c']], key=lambda n: n['d'], reverse=True),
-    "events": sorted([e for e in d['events'] if 'pl' in e['c']], key=lambda e: e['d']),
-    "next": [x for x in d['overview']['next'] if x['c'] == 'pl'],
+    "news": sorted([n for n in d['news'] if 'pl' in n['c'] and not mentions_q(n['line'])], key=lambda n: n['d'], reverse=True),
+    "events": sorted([e for e in d['events'] if 'pl' in e['c'] and not mentions_q(e['what'])
+                      and 'quantum' not in (e['what'] + ' ' + e.get('why', '')).lower()], key=lambda e: e['d']),
+    "next": [dict(x, t=strip_q(x['t'])) for x in d['overview']['next'] if x['c'] == 'pl' and strip_q(x['t'])],
     "access": {
         "lede": "Every EU Member State and Norway has a Chips Competence Centre. Under the Chips Act the centres help companies, start-ups and researchers reach the pilot lines, and the aCCCess network action connects all 30 of them.",
         "ctas": [

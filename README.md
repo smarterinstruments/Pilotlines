@@ -1,6 +1,6 @@
 # EU Pilot Lines Monitor (alpha)
 
-Independent weekly view of the 11 pilot lines of the EU Chips Act (Chips for Europe Initiative): how far each line is on the road to open access, what it offers today, when external users get in, and how to reach the lines through the national Chips Competence Centres of the aCCCess network.
+Independent weekly view of the five semiconductor pilot lines of the EU Chips Act (Chips for Europe Initiative; the six quantum pilot lines are followed on the Pillar I Monitor only): how far each line is on the road to open access, what it offers today, when external users get in, and how to reach the lines through the national Chips Competence Centres of the aCCCess network.
 
 - Live page: https://smarterinstruments.github.io/Pilotlines/
 - Prepared by Stanislav Černý, Czech National Semiconductor Cluster, a partner in the aCCCess network action
