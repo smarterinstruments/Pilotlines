@@ -61,7 +61,7 @@ out = {
              "lede": "What the five semiconductor pilot lines of the EU Chips Act open to external users today, what comes next, and how to reach them through the network of Chips Competence Centres. Updated weekly from the lines' own channels, CORDIS and the Chips JU."},
     "stats": stats,
     "sectors": [s for s in d['sectors'] if s['id'] != 'quant'],
-    "rings": [r for r in d['rings'] if r['n'] in rings_used],
+    "rings": d['rings'],  # keep the whole readiness scale, also levels no semiconductor line occupies
     "lines": lines,
     "newsTypes": d['newsTypes'],
     "news": sorted([n for n in d['news'] if 'pl' in n['c'] and not mentions_q(n['line'])], key=lambda n: n['d'], reverse=True),

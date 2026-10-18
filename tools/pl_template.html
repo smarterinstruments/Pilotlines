@@ -444,7 +444,7 @@ html.embed .strip{margin-top:14px}
     $('radarSvg').innerHTML = svg;
     $('radarSvg').addEventListener('click', e => { const a = e.target.closest('a.rlink'); if (!a) return; e.preventDefault(); openCard(a.dataset.line); });
     $('ringKey').innerHTML = D.rings.map(r => {
-      const who = D.lines.filter(l => l.ring === r.n).map(l => esc(l.name)).join(', ');
+      const who = D.lines.filter(l => l.ring === r.n).map(l => esc(l.name)).join(', ') || '<span style="color:var(--faint)">none of the lines on this page at the moment</span>';
       return '<div class="rk"><div class="n '+ringCls(r.n)+'">'+r.n+'</div><div><div class="t '+ringCls(r.n)+'">'+esc(r.name)+'</div><div class="d">'+esc(r.desc)+'</div><div class="who">'+who+'</div></div></div>';
     }).join('');
     $('sectorLegend').innerHTML = D.sectors.map(s => '<span><span class="sw" style="background:'+s.color+'"></span>'+esc(s.name)+'</span>').join('');
