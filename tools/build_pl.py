@@ -37,7 +37,7 @@ named = [l['name'] for l in lines if re.search(r'named industrial user', l.get('
 stats = [
     {"v": str(len(lines)), "l": "semiconductor pilot lines", "s": "first Chips for Europe call: " + ", ".join(l['name'] for l in lines)},
     {"v": str(len(ring(1)) + len(ring(2))), "l": "take external users today",
-     "s": "open access: " + ", ".join(ring(1)) + "; early access: " + ", ".join(ring(2))},
+     "s": "projects on the line: " + ", ".join(ring(1)) + "; design kits and services: " + ", ".join(ring(2))},
     ({"v": str(len(ring(3))), "l": "preparing access", "s": ", ".join(ring(3)) + "; no public call yet"} if ring(3) else
      {"v": str(len(named)), "l": "name an industrial user", "s": ", ".join(named) + "; see the line cards for the companies"}),
     {"v": str(sum(1 for l in lines if linked(l))), "l": "name a link with competence centres", "s": "access guidelines, joint roadshows, trainings or webinars with a national centre"},
@@ -58,7 +58,7 @@ for name, url in d['sources']:
 
 out = {
     "meta": {**d['meta'],
-             "lede": "Where the five semiconductor pilot lines of the EU Chips Act stand on the road to open access, what they offer today, and how to reach them through the network of Chips Competence Centres. Updated weekly from the lines' own channels, CORDIS and the Chips JU."},
+             "lede": "What the five semiconductor pilot lines of the EU Chips Act open to external users today, what comes next, and how to reach them through the network of Chips Competence Centres. Updated weekly from the lines' own channels, CORDIS and the Chips JU."},
     "stats": stats,
     "sectors": [s for s in d['sectors'] if s['id'] != 'quant'],
     "rings": [r for r in d['rings'] if r['n'] in rings_used],
@@ -84,7 +84,7 @@ out = {
         "intro": "This page is an independent view of the EU Chips Act pilot lines, built to sit alongside the aCCCess network of competence centres. It reports what the lines publish. Tell us what is wrong, what is missing and what would make it useful.",
         "questions": [
             ["Accuracy", "Is your pilot line described correctly? What is missing or out of date?"],
-            ["Readiness scale", "Do the four levels (open access running, early access, preparing access, ramp-up) describe readiness well? Which criteria should define each level?"],
+            ["Readiness scale", "Do the levels (projects on the line, design kits and services open, preparing access, ramp-up) describe what a line offers external users well? Which criteria should define each level?"],
             ["Indicators", "Which two or three indicators would help you most? For example external users, access requests and lead times, published price conditions, PDKs on the design platform, referrals from competence centres."],
             ["Competence centres", "Which centre helped you reach a pilot line? Which link between a line and a centre is missing here?"],
             ["Data contribution", "Would your pilot line send a short monthly status line?"],
