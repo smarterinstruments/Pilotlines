@@ -191,6 +191,20 @@ td.d{font:13px var(--mono);white-space:nowrap;color:var(--muted);font-variant-nu
 html.embed .topbar,html.embed .site-foot{display:none}
 html.embed .hero .in{padding-block:6px 30px}
 html.embed .strip{margin-top:14px}
+
+/* search across sections */
+.rail .qwrap{display:flex;align-items:center;gap:6px;margin-left:auto;padding:7px 0 7px 10px}
+.rail .qwrap input{width:180px;max-width:42vw;border:1.5px solid var(--link);border-radius:999px;color:var(--fg);font:600 13px var(--sans);padding:5px 12px 5px 30px;background-color:var(--panel2);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23155dfc' stroke-width='3' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m21 21-4.5-4.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:9px center;background-size:14px;transition:width .15s}
+.rail .qwrap input:focus{width:250px;outline:2px solid var(--lime);outline-offset:1px}
+.rail .qwrap input::placeholder{color:var(--muted);opacity:1}
+.rail .qwrap .cnt{font:600 12px var(--mono);color:var(--navy);white-space:nowrap}
+.rail .qwrap .clr{background:none;border:1px solid var(--line);color:var(--muted);border-radius:50%;width:22px;height:22px;line-height:1;font:600 12px var(--sans);cursor:pointer;padding:0}
+.rail .qwrap .clr:hover{color:var(--fg);border-color:var(--link)}
+.qhit-badge{font:700 10px var(--sans);color:var(--bg);background:var(--navy);border-radius:999px;padding:1px 6px;margin-left:5px;vertical-align:1px}
+tr.qhide,.card.qhide,.cta.qhide,li.qhide{display:none!important}
+#radarSvg a.rlink.qdim{opacity:.15}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .rail .qwrap input{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2386aaff' stroke-width='3' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m21 21-4.5-4.5'/%3E%3C/svg%3E")}}
+:root[data-theme="dark"] .rail .qwrap input{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2386aaff' stroke-width='3' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m21 21-4.5-4.5'/%3E%3C/svg%3E")}
 </style>
 </head>
 <body>
@@ -746,6 +760,55 @@ html.embed .strip{margin-top:14px}
   // sources
   $('method').textContent = D.method;
   $('srcList').innerHTML = D.sources.map(s => '<li>'+lnk(s[1], esc(s[0]))+'</li>').join('');
+})();
+</script>
+
+<script>
+// search across all sections: filters cards, table rows and list items, dims radar dots,
+// shows hit counts on the section rail, keeps ?q= in the URL
+(function(){
+  const $ = id => document.getElementById(id);
+  const D = JSON.parse(document.getElementById('monitor-data').textContent);
+  const norm = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  const rail = document.querySelector('#rail');
+  if (!rail) return;
+  const qwrap = document.createElement('span'); qwrap.className = 'qwrap'; qwrap.setAttribute('role','search');
+  qwrap.innerHTML = '<span class="cnt" id="qcnt" hidden></span><input type="search" id="q" placeholder="Search the monitor…" aria-label="Search across all sections"><button type="button" class="clr" id="qclr" hidden aria-label="Clear search" title="Clear">✕</button>';
+  rail.appendChild(qwrap);
+  const input = qwrap.querySelector('#q'), qcnt = qwrap.querySelector('#qcnt'), qclr = qwrap.querySelector('#qclr');
+  function targets(){
+    const t = [];
+    const add = (secId, sel, rootId) => { const r = $(rootId); if (r) r.querySelectorAll(sel).forEach(el => t.push([secId, el])); };
+    add('overview', 'li', 'watch');
+    add('overview', 'tbody tr', 'nextTbl');
+    add('lines', '.card', 'cards');
+    add('access', '.cta', 'ctaGrid');
+    add('access', 'tbody tr', 'entryTbl');
+    add('access', 'tbody tr', 'modelTbl');
+    add('news', 'tbody tr', 'newsTbl');
+    add('events', 'tbody tr', 'evTbl');
+    add('feedback', 'li', 'fbList');
+    add('sources', 'li', 'srcList');
+    return t;
+  }
+  function badge(secId, n){ const a = rail.querySelector('a[href="#' + secId + '"]'); if (!a) return; let x = a.querySelector('.qhit-badge'); if (n > 0){ if (!x){ x = document.createElement('span'); x.className = 'qhit-badge'; a.appendChild(x); } x.textContent = n; } else if (x) x.remove(); }
+  const SECS = ['overview','radar','lines','timeline','access','news','events','feedback','sources'];
+  function run(){
+    const words = norm(input.value.trim()).split(/\s+/).filter(Boolean);
+    const per = {};
+    targets().forEach(([secId, el]) => { if (!words.length){ el.classList.remove('qhide'); return; } const txt = norm(el.textContent); const hit = words.every(w => txt.includes(w)); el.classList.toggle('qhide', !hit); if (hit) per[secId] = (per[secId] || 0) + 1; });
+    document.querySelectorAll('#radarSvg a.rlink').forEach(a => { if (!words.length){ a.classList.remove('qdim'); return; } const l = D.lines.find(x => x.id === a.dataset.line); const txt = norm(l ? Object.values(l).filter(v => typeof v === 'string').join(' ') : ''); const hit = words.every(w => txt.includes(w)); a.classList.toggle('qdim', !hit); if (hit) per.radar = (per.radar || 0) + 1; });
+    SECS.forEach(id => badge(id, words.length ? (per[id] || 0) : 0));
+    const total = SECS.reduce((a, id) => a + (id === 'radar' ? 0 : (per[id] || 0)), 0);
+    qcnt.hidden = qclr.hidden = !words.length;
+    qcnt.textContent = words.length ? total + ' matches' : '';
+    try { const u = new URL(location.href); if (words.length) u.searchParams.set('q', input.value.trim()); else u.searchParams.delete('q'); history.replaceState(null, '', u); } catch(e){}
+  }
+  let deb = 0;
+  input.addEventListener('input', () => { clearTimeout(deb); deb = setTimeout(run, 120); });
+  qclr.addEventListener('click', () => { input.value = ''; run(); input.focus(); });
+  ['fType', 'fSec'].forEach(id => { const el = $(id); if (el) el.addEventListener('click', () => setTimeout(run, 0)); });
+  try { const q0 = new URLSearchParams(location.search).get('q'); if (q0){ input.value = q0; run(); } } catch(e){}
 })();
 </script>
 
